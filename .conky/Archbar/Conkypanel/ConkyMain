@@ -1,0 +1,138 @@
+alignment top_left
+background yes
+border_margin 0
+border_width 1
+default_color ffffff
+double_buffer yes
+draw_outline no
+draw_graph_borders yes
+draw_borders no
+draw_shades no
+gap_x 17
+gap_y 50
+maximum_width 250
+minimum_size 0 0
+no_buffers yes
+uppercase no
+override_utf8_locale yes
+own_window yes
+own_window_title conky
+own_window_transparent no
+own_window_color 000000
+own_window_argb_visual yes
+own_window_argb_value 55
+own_window_type override
+own_window_hints undecorated,below,skip_taskbar,skip_page
+own_window_class conky
+text_buffer_size 8000
+total_run_times 0
+update_interval 1
+use_xft yes
+xftalpha 1.0
+xftfont Freesans:pixelsize=11
+short_units yes
+
+# -- Lua Load -- #
+#lua_load /home/dobbie/.draw_bg.lua
+#lua_draw_hook_pre draw_bg
+
+#lua_load ~/.bargraph_small.lua
+lua_draw_hook_post main_bars
+
+own_window_colour 000000
+
+TEXT
+${color cdbf9a}${font conkysymbols:size=50}${alignc 40}T
+#${voffset -90}${color c1c1c1}${font Monospace:pixelsize=18}${offset -45}${alignc}Manjaro i3WM
+${voffset -50}${color cdbf9a}${font Monospace:pixelsize=11}KERNEL ${color 1c1c1c}${stippled_hr 2}${color c1c1c1}${font Monospace Mono:pixelsize=11}
+
+${color c1c1c1}${font Monospace:pixelsize=11}${kernel}
+${color 1c1c1c}${stippled_hr 2}${color c1c1c1}
+${color c1c1c1}${font Monospace:pixelsize=11}${time %A}
+${color cdbf9a}${font Monospace:pixelsize=15}${time %I:%M %P }${color c1c1c1}${font micro:pixelsize=11}
+${font snap:pixelsize=11}${time %B %d}, ${time %G}
+
+${color cdbf9a}${font Monospace:pixelsize=11}SYSTEM ${color 1c1c1c}${stippled_hr 2}${color c1c1c1}${font Monospace Mono:pixelsize=11}
+
+DISTRO: ${alignr 10}Manjaro Linux
+HOST: ${alignr 10}${nodename}
+UPTIME: ${alignr 10}${uptime}
+PROCESSES: ${alignr 10}${running_processes}
+#ARCHITECTURE: ${alignr 10}${machine}
+PROCESSOR: ${alignr 10}${execi 100 lscpu | grep -i "model name" | cut -c 20-}
+#CPU LOAD: ${alignr 10}${loadavg}
+CPU TEMP: ${alignr 10}${execp sensors coretemp-isa-0000 | grep 'Core 0' | cut -c16-17} °C
+FAN SPEED: ${alignr 10}${execi 15 sensors | grep -i "fan1" | cut -c 14-21}
+GPU TEMP: ${alignr 10}${execi 15 sensors | head -n 10 | grep -i "temp1" | cut -c 15-22}
+#MB TEMP: ${alignr 10}${execi 15 sensors | tail -n 15 | grep -i "temp1" | cut -c 15-22}
+UPDATES:   ${color cdbf9a}${color1}${execpi 3600 checkupdates | wc -l}
+#${color c1c1c1}${font Hack Mono:pixelsize=12}p ${color cdbf9a}${font Monospace:pixelsize=11}DESKTOP ${color 1c1c1c}${stippled_hr 2}${color c1c1c1}${font Monospace Mono:pixelsize=11}
+#DESKTOP: ${desktop}
+
+${color cdbf9a}${font Monospace:pixelsize=11}NETWORK ${color 1c1c1c}${stippled_hr 2}${color c1c1c1}${font Monospace Mono:pixelsize=11}
+
+SPEED UP: ${upspeed enp27s0}
+${upspeedgraph enp27s0 15,240 cdbf9a cdbf9a}
+SPEED DOWN: ${downspeed enp27s0}
+${downspeedgraph enp27s0 15,240 cdbf9a cdbf9a}
+TOTAL UP: ${totalup enp27s0}
+TOTAL DOWN: ${totaldown enp27s0}
+
+${color cdbf9a}${font Monospace:pixelsize=11}CPU ${color 1c1c1c}${stippled_hr 2}${color c1c1c1}
+
+${font Monospace Mono:pixelsize=11}TOTAL: ${cpu cpu0}%
+${goto 22}  ${color 3f506b}${cpubar 5,210 cpu0}${color c1c1c1}
+CORE 1: ${freq cpu1}MHz     CORE 7: ${freq cpu7}MHz
+${font Monospace:pixelsize=11}${cpu cpu1}%${goto 25} ${color 3f506b}${cpubar 5,90 cpu1} ${color c1c1c1}${font Monospace Mono:pixelsize=11}${font Monospace:pixelsize=11} ${cpu cpu7}% ${color 3f506b}${cpubar 5,90 cpu7}${color c1c1c1}${font Monospace Mono:pixelsize=11}
+CORE 2: ${freq cpu2}MHz     CORE 8: ${freq cpu8}MHz
+${font Monospace:pixelsize=11}${cpu cpu2}%${goto 25} ${color 3f506b}${cpubar 5,90 cpu2}${color c1c1c1}${font micro:pixelsize=11}${font Monospace:pixelsize=11} ${cpu cpu8}% ${color 3f506b} ${cpubar 5,90 cpu8}${color c1c1c1}${font Monospace Mono:pixelsize=11}
+CORE 3: ${freq cpu3}MHz     CORE 9: ${freq cpu9}MHz
+${font Monospace:pixelsize=11}${cpu cpu3}%${goto 25} ${color 3f506b}${cpubar 5,90 cpu3}${color c1c1c1}${font micro:pixelsize=11}${font Monospace:pixelsize=11} ${cpu cpu9}% ${color 3f506b} ${cpubar 5,90 cpu9}${color c1c1c1}${font Monospace Mono:pixelsize=11}
+CORE 4: ${freq cpu4}MHz     CORE 10: ${freq cpu10}MHz
+${font Monospace:pixelsize=11}${cpu cpu4}%${goto 25} ${color 3f506b}${cpubar 5,90 cpu4}${color c1c1c1}${font micro:pixelsize=11}${font Monospace:pixelsize=11} ${cpu cpu10}% ${color 3f506b} ${cpubar 5,90 cpu 10}${color c1c1c1}${font Monospace Mono:pixelsize=11}
+CORE 5: ${freq cpu5}MHz     CORE 11: ${freq cpu11}MHz
+${font Monospace:pixelsize=11}${cpu cpu5}%${goto 25} ${color 3f506b}${cpubar 5,90 cpu5}${color c1c1c1}${font micro:pixelsize=11}${font Monospace:pixelsize=11} ${cpu cpu11}% ${color 3f506b} ${cpubar 5,90 cpu11}${color c1c1c1}${font Monospace Mono:pixelsize=11}
+CORE 6: ${freq cpu6}MHz     CORE 12: ${freq cpu12}MHz
+${font Monospace:pixelsize=11}${cpu cpu6}%${goto 25} ${color 3f506b}${cpubar 5,90 cpu6}${color c1c1c1}${font micro:pixelsize=11}${font Monospace:pixelsize=11} ${cpu cpu12}% ${color 3f506b} ${cpubar 5,90 cpu12}${color c1c1c1}${font Monospace Mono:pixelsize=11}
+${color cdbf9a}${font Monospace:pixelsize=11}MEMORY ${color 1c1c1c}${stippled_hr 2}${color c1c1c1}${font Monospace Mono:pixelsize=11}
+
+RANDOM ACCESS MEMORY: ${mem}/${memmax}
+${font Monospace:pixelsize=11}${memperc}%${font micro:pixelsize=11}${goto 25} ${color 3f506b}${membar 5,200}${color c1c1c1}
+
+${font Monospace:pixelsize=11}${top_mem name 1}${alignr 10}${top_mem mem 1}%
+${font Monospace:pixelsize=11}${top_mem name 2}${alignr 10}${top_mem mem 2}%
+${font Monospace:pixelsize=11}${top_mem name 3}${alignr 10}${top_mem mem 3}%
+${font Monospace:pixelsize=11}${top_mem name 4}${alignr 10}${top_mem mem 4}%
+${font Monospace:pixelsize=11}${top_mem name 4}${alignr 10}${top_mem mem 5}%
+
+${color cdbf9a}${font Monospace:pixelsize=11}DISCS ${color 1c1c1c}${stippled_hr 2}${color c1c1c1}${font Monospace Mono:pixelsize=11}
+
+/ROOT:  ${fs_used /}/${fs_size /}
+${font Monospace:pixelsize=11}${fs_used_perc /}%${color 3f506b}   ${fs_bar 5,200 /}${font Monospace Mono:pixelsize=11}${color c1c1c1}
+
+/HOME: ${fs_used /home}/${fs_free /home}
+${font Monospace:pixelsize=11}${fs_used_perc /home}%${color 3f506b}   ${fs_bar 5,200 /home}${font Monospace Mono:pixelsize=11}${color c1c1c1}
+
+#/MUSIC: ${fs_used /run/media/dobbie/Music}/${fs_free /run/media/dobbie/Music}
+#${font Monospace:pixelsize=11}${fs_used_perc /run/media/dobbie/Music}% ${color 3f506b}${fs_bar 5,90}
+
+#${font Monospace Mono:pixelsize=11}${color c1c1c1}/MOVIES: ${fs_used /run/media/dobbie/Movies}/${fs_free /run/media/dobbie/Movies}
+#${font Monospace:pixelsize=11}${fs_used_perc /run/media/dobbie/Movies}%${color 3f506b} ${fs_bar 5,90 /run/media/dobbie/Movies}${font Monospace Mono:pixelsize=11}${color c1c1c1}
+
+#/BACKUP: ${fs_used /mnt/3A90DCCF7A4AF50B}/${fs_free /mnt/3A90DCCF7A4AF50B}
+#${font Monospace:pixelsize=11}${fs_used_perc /mnt/3A90DCCF7A4AF50B}%${color 3f506b} ${fs_bar 5,90 /mnt/3A90DCCF7A4AF50B}${font Monospace Mono:pixelsize=11}${color c1c1c1}
+
+#/BACKUP1: ${fs_used /mnt/77F3EE190BD86789}/${fs_free /mnt/77F3EE190BD86789}
+#${font Monospace:pixelsize=11}${fs_used_perc /mnt/77F3EE190BD86789}%${color 3f506b} ${fs_bar 5,90 /mnt/77F3EE190BD86789}${font Monospace Mono:pixelsize=11}${color c1c1c1}
+
+#/BACKUP2: ${fs_used /mnt/wwn-0x5000c50015d9bbbc-part1}/${fs_free /mnt/wwn-0x5000c50015d9bbbc-part1}
+#${font Monospace:pixelsize=11}${fs_used_perc /mnt/wwn-0x5000c50015d9bbbc-part1}%${color 3f506b} ${fs_bar 5,90 /mnt/wwn-0x5000c50015d9bbbc-part1}${font Monospace Mono:pixelsize=11}${color c1c1c1}
+
+#${color c1c1c1}${font Hack Mono:pixelsize=12}l ${color cdbf9a}${font Monospace:pixelsize=11}NOW PLAYING ${color 1c1c1c}${stippled_hr 2}${hr 2}${color c1c1c1}${font Monospace Mono:pixelsize=11}
+
+#${if_running audacious}${exec audtool --current-song-tuple-data title}
+#${if_running audacious}${exec audtool --current-song-tuple-data album}
+
+#${if_running audacious}${exec audtool --current-song-tuple-data artist}
+#${exec audtool --current-song-bitrate-kbps} kbps | ${exec audtool --current-song-length}  ${color 3f506b}${execbar expr 100 \* $(audtool --current-song-output-length-seconds) \/ $(audtool --current-song-length-seconds)}$endif
+#${color c1c1c1}PLAYLIST: ${if_running audacious}${exec audtool --current-playlist}
