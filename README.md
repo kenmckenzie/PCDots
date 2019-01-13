@@ -6,4 +6,3 @@ adjust accordingy
 
 ![Screenshot](screenshot/screenshot.png)
 
-Test
