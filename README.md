@@ -1,2 +1,6 @@
 # i3wmDots
 My personal dotfiles for i3wm and sundry apps, terribly formatted at the moment as I've rushed through 
+
+Note that I predominantly use Hack Nerd Font so please make sure that is installed or 
+adjust accordingy
+
