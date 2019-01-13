@@ -3,3 +3,5 @@ My personal dotfiles for i3wm and sundry apps, terribly formatted at the moment 
 
 Note that I predominantly use Hack Nerd Font so please make sure that is installed or
 adjust accordingy
+
+![Screenshot](screenshot/screenshot.png)
