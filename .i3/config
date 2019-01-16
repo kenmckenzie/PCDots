@@ -21,7 +21,7 @@ bindsym $mod+n border normal
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-#Original Font, Changed to Hack 
+#Original Font, Changed to Hack
 #font xft:URWGothic-Book 11
 font xft:Hack Nerd Font 11
 
@@ -152,13 +152,13 @@ bindsym $mod+Ctrl+Left workspace prev
 # to display names or symbols instead of plain workspace numbers you can use
 # something like: set $ws1 1:mail
 #                 set $ws2 2:
-set $ws1 1:term
-set $ws2 2:browser
-set $ws3 3:files
-set $ws4 4:Dev
-set $ws5 5:Games
-set $ws6 6:Misc1
+set $ws1 1:1
+set $ws2 2:2
+set $ws3 3:3
+set $ws4 4:4
+set $ws5 5:5
 set $ws7 7:Misc2
+set $ws6 6:Misc1
 set $ws8 8:Misc3
 
 # switch to workspace
