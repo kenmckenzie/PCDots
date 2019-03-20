@@ -41,8 +41,69 @@ secondary = ${xrdb:color2:#222}
 alert = ${xrdb:color3:#222}
 background-alt = #444
 
-[bar/example]
+[bar/bar1]
 monitor = ${env:MONITOR:HDMI-A-0}
+width = 100%
+height = 27
+;offset-x = 10%
+;offset-y = 1%
+radius = 6.0
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = ${colors.foreground}
+
+border-size = 4
+border-color = #00000000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+;fonts changed. originals below for reference
+;font-0 = fixed:pixelsize=10;1
+;font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+;font-2 = siji:pixelsize=10;1
+font-0 = Hack Nerd Font:pixelsize=12;3
+font-1 = Hack Nerd Font:pixelsize=12;3
+font-2 = Hack Nerd Font:pixelsize=12;3
+
+;font-0 = NotoSans Nerd Font:pixelsize=14;0
+;font-0 = SauceCodePro Nerd Font:pixelsize=12;0
+;font-1 = Hack Nerd Font Mono=15;0
+;font-2 = Hack Nerd Font =15;0
+
+modules-left = i3 xwindow
+modules-center = mpd
+;testing less modules for a cleaner look
+;modules-right = filesystem pulseaudio memory cpu eth date powermenu
+modules-right = pulseaudio date powermenu
+tray-position = right
+tray-padding = 2
+;tray-transparent = true
+;tray-background = #3363ff
+
+;wm-restack = bspwm
+;wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[bar/bar2]
+monitor = ${env:MONITOR:DVI-D-0}
 width = 100%
 height = 27
 ;offset-x = 10%
@@ -78,10 +139,11 @@ font-2 = Hack Nerd Font:pixelsize=12;3
 ;font-1 = Hack Nerd Font Mono=15;0
 ;font-2 = Hack Nerd Font =15;0
 
-modules-left = i3
+modules-left = i3 xwindow
 modules-center = mpd
-modules-right = filesystem pulseaudio memory cpu eth date powermenu
-
+;testing less modules for a cleaner look
+;modules-right = filesystem pulseaudio memory cpu eth date powermenu
+modules-right = pulseaudio date powermenu
 tray-position = right
 tray-padding = 2
 ;tray-transparent = true
@@ -101,9 +163,73 @@ tray-padding = 2
 cursor-click = pointer
 cursor-scroll = ns-resize
 
+[bar/vncbar]
+monitor = ${env:MONITOR:VNC-0}
+width = 100%
+height = 27
+;offset-x = 10%
+;offset-y = 1%
+radius = 6.0
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+;line-size = 3
+;line-color = #f00
+
+border-size = 4
+border-color = #00000000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+;fonts changed. originals below for reference
+;font-0 = fixed:pixelsize=10;1
+;font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+;font-2 = siji:pixelsize=10;1
+font-0 = Hack Nerd Font:pixelsize=12;3
+font-1 = Hack Nerd Font:pixelsize=12;3
+font-2 = Hack Nerd Font:pixelsize=12;3
+
+;font-0 = NotoSans Nerd Font:pixelsize=14;0
+;font-0 = SauceCodePro Nerd Font:pixelsize=12;0
+;font-1 = Hack Nerd Font Mono=15;0
+;font-2 = Hack Nerd Font =15;0
+
+modules-left = i3 xwindow
+modules-center = mpd
+;testing less modules for a cleaner look
+;modules-right = filesystem pulseaudio memory cpu eth date powermenu
+modules-right = pulseaudio date powermenu
+tray-position = right
+tray-padding = 2
+;tray-transparent = true
+;tray-background = #3363ff
+
+;wm-restack = bspwm
+;wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+
+
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:30:...%
+label = %title:0:60:...%
+label-layout-underline = ${colors.secondary}
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -163,13 +289,13 @@ strip-wsnumbers = true
 
 ws-icon-0 = 1:1;
 ws-icon-1 = 2:2;
-ws-icon-2 = 3:3;
-ws-icon-3 = 4:4;
+ws-icon-2 = 3:3;
+ws-icon-3 = 4:4;
 ws-icon-4 = 5:5;
 ws-icon-default = 
 
 ; Only show workspaces on the same output as the bar
-;pin-workspaces = true
+pin-workspaces = true
 
 label-mode-padding = 2
 label-mode-foreground = #000
@@ -203,7 +329,7 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 
 [module/mpd]
 type = internal/mpd
-format-online =  <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+format-online =   <icon-prev> <icon-stop> <toggle> <icon-next> <label-song>
 
 icon-prev = 
 icon-stop = 
@@ -440,12 +566,18 @@ menu-0-1-exec = menu-open-2
 menu-1-0 = cancel
 menu-1-0-exec = menu-open-0
 menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
+menu-1-1-exec = reboot
 
 menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
+menu-2-0-exec = poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
+
+menu-3-0 = logout
+menu-3-0-exec menu-open-3
+menu-3-1 = cancel
+menu-3-1-exec = logout
+
 
 [settings]
 screenchange-reload = true

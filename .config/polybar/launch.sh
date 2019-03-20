@@ -6,8 +6,8 @@ killall -q polybar
 # Wait until the processes have been shut down
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
-# Launch bar1 and bar2
-polybar example &
-#polybar bar2 &
-
+# Launch bar1 and bar2 , Will also start a bar for vnc when active 
+polybar bar1 &
+polybar bar2 &
+polybar vncbar &
 echo "Bars launched..."
