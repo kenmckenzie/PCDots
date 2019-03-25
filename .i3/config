@@ -67,11 +67,11 @@ bindsym XF86AudioPrev exec mpc prev
 
 # Start Applications
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
-bindsym $mod+F2 exec chromium
+bindsym $mod+F2 exec firefox
 bindsym $mod+F3 exec pcmanfm
 # bindsym $mod+F3 exec ranger
 bindsym $mod+Shift+F3 exec gksu pcmanfm
-bindsym $mod+F5 exec urxvt -e ncmpcpp -T music
+bindsym $mod+F5 exec urxvt -e ncmpcpp
 bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
@@ -83,12 +83,16 @@ bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
 # focus_follows_mouse no
 
-# change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+# Changing all movement keys to vim keys, cause seriously, why change something that has existed
+# for fucken decades?
 
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# Still keeping normal arrow keys as i'm still learning vim bindings 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -96,10 +100,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -137,6 +141,13 @@ bindsym $mod+Shift+s sticky toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
+# Personal Scratchpad additions
+for_window [instance="dropdown"] floating enable
+for_window [instance="dropdown"] resize set 625 400 
+for_window [instance="dropdown"] move scratchpad
+ 
+
+
 # move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
 
@@ -160,6 +171,19 @@ set $ws5 5:5
 set $ws7 7:Misc2
 set $ws6 6:Misc1
 set $ws8 8:Misc3
+
+# Set workspace to monitors
+
+workspace "1:1" output HDMI-A-0
+workspace "2:2" output DVI-D-0
+workspace "3:3" output HDMI-A-0
+workspace "4:4" output DVI-D-0
+workspace "5:5" output HDMI-A-0
+# workspace "" output HDMI2
+# workspace "" output HDMI2
+# workspace "" output HDMI2
+# workspace "" output HDMI2
+# workspace "" output HDMI2
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -193,11 +217,13 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 # Open applications on specific workspaces
 # assign [class="Thunderbird"] $ws1
-assign [class="Chromium"] $ws2
-assign [class="Pcmanfm"] $ws3
+assign [class="Firefox"] $ws2
+assign [class="Kodi"] $ws2
+assign [class="Pcmanfm"] $ws6
 assign [class="Steam"] $ws5
-assign [class="Atom"] $ws4
-assign [title="music"] $ws3
+assign [class="Atom"] $ws3
+assign [class="Spotify"] $ws4
+#assign [title="music"] $ws3
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="calamares"] floating enable border normal
@@ -226,6 +252,17 @@ for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 
+# steam shit
+for_window [class="^Steam$" title="^Friends$"] floating enable
+for_window [class="^Steam$" title="Steam - Update News"] floating enable
+for_window [class="^Steam$" title=".* - Chat"] floating enable
+for_window [class="^Steam$" title="^Settings$"] floating enable
+for_window [class="^Steam$" title=".* - event started"] floating enable
+for_window [class="^Steam$" title=".* CD key"] floating enable
+for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
+for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
+for_window [class="^Steam$" title="Steam"] floating enable
+for_window [class="Wpg"] floating enable 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
 
@@ -263,10 +300,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 5 px or 5 ppt
-        bindsym k resize grow height 5 px or 5 ppt
-        bindsym l resize shrink height 5 px or 5 ppt
-        bindsym semicolon resize grow width 5 px or 5 ppt
+        bindsym h resize shrink width 5 px or 5 ppt
+        bindsym j resize grow height 5 px or 5 ppt
+        bindsym k resize shrink height 5 px or 5 ppt
+        bindsym l resize grow width 5 px or 5 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -284,25 +321,28 @@ bindsym $mod+9 exec --no-startup-id blurlock
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nitrogen --restore; sleep 1; compton -b
-#exec --no-startup-id manjaro-hello
+# exec --no-startup-id --restore ; sleep 1; compton -b
+# exec --no-startup-id manjaro-hello
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
+exec --no-startup-id urxvt -name dropdown
+
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
-#exec --no-startup-id start_conky_maia
+# exec --no-startup-id start_conky_maia
 # exec --no-startup-id start_conky_green
-exec --no-startup-id xautolock -time 60 -locker blurlock
+exec --no-startup-id xautolock -time 360 -locker blurlock
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
-#exec --no-startup-id /home/ulverza/Pictures/Walls/Nier.jpg
+# exec --no-startup-id /home/ulverza/Pictures/Walls/Nier.jpg
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id $HOME/.conky/Archbar/Conkypanel/startconky.sh
-exec_always --no-startup-id wal -g -i $HOME/Pictures/Walls/Wall.jpg -a 70
+exec_always --no-startup-id feh --bg-center "$(< "${HOME}/.cache/wal/wal")" ; compton -b
+exec_always --no-startup-id wal -g -i $HOME/Pictures/Walls/Wall.jpg -a 70 -n
 exec_always --no-startup-id wal -R
-
+exec_always --no-startup-id $HOME/.scripts/waldunst.sh
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
