@@ -5,6 +5,7 @@ My personal dotfiles for i3wm and sundry apps, terribly formatted at the moment 
 
 # Applications Needed
 -i3wm gapps (Obviously)
+
 -ncmpcpp with mopidy and mopidy-spotify (visualizer works but is a hackjob)
 
 
@@ -20,7 +21,12 @@ My personal dotfiles for i3wm and sundry apps, terribly formatted at the moment 
 -Pywal(love this #$#!ing app)
 
 
--nitrogen (for wallpapers)
+-wpgtk
+
+-dunst (Create a symlink from the /.cache/Wal/dunstrc to the dunst config folder for theming to work
+
+
+-nitrogen (for wallpapers, you can also use feh but i3 config will need to be edited)
 
 
 -urxvt
