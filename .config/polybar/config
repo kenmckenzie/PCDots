@@ -16,19 +16,6 @@
 ;
 ;==========================================================
 
-;[colors]
-;background = #33000000
-;background = ${xrdb:color0:#222}
-;original color for bar, went with transparency above
-;background = #222
-;foreground = ${xrdb:color7:#222}
-;testing orginally dfdfdf
-;foreground = #dfdfdf
-;testing originally 555
-;foreground-alt = #555
-;primary = #ffb52a
-;secondary = #e60053
-;alert = #bd2c40
 
 [colors]
 ;transparency first then xresources plug 2nd
@@ -69,19 +56,14 @@ module-margin-right = 2
 ;font-0 = fixed:pixelsize=10;1
 ;font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 ;font-2 = siji:pixelsize=10;1
+
 font-0 = Hack Nerd Font:pixelsize=12;3
 font-1 = Hack Nerd Font:pixelsize=12;3
 font-2 = Hack Nerd Font:pixelsize=12;3
 
-;font-0 = NotoSans Nerd Font:pixelsize=14;0
-;font-0 = SauceCodePro Nerd Font:pixelsize=12;0
-;font-1 = Hack Nerd Font Mono=15;0
-;font-2 = Hack Nerd Font =15;0
 
 modules-left = i3 xwindow
-modules-center = mpd
-;testing less modules for a cleaner look
-;modules-right = filesystem pulseaudio memory cpu eth date powermenu
+modules-center = mpd player-playerctl
 modules-right = pulseaudio date powermenu
 tray-position = right
 tray-padding = 2
@@ -130,19 +112,14 @@ module-margin-right = 2
 ;font-0 = fixed:pixelsize=10;1
 ;font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 ;font-2 = siji:pixelsize=10;1
+
 font-0 = Hack Nerd Font:pixelsize=12;3
 font-1 = Hack Nerd Font:pixelsize=12;3
 font-2 = Hack Nerd Font:pixelsize=12;3
 
-;font-0 = NotoSans Nerd Font:pixelsize=14;0
-;font-0 = SauceCodePro Nerd Font:pixelsize=12;0
-;font-1 = Hack Nerd Font Mono=15;0
-;font-2 = Hack Nerd Font =15;0
 
 modules-left = i3 xwindow
-modules-center = mpd
-;testing less modules for a cleaner look
-;modules-right = filesystem pulseaudio memory cpu eth date powermenu
+modules-center = mpd player-playerctl
 modules-right = pulseaudio date powermenu
 tray-position = right
 tray-padding = 2
@@ -191,17 +168,14 @@ module-margin-right = 2
 ;font-0 = fixed:pixelsize=10;1
 ;font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 ;font-2 = siji:pixelsize=10;1
+
 font-0 = Hack Nerd Font:pixelsize=12;3
 font-1 = Hack Nerd Font:pixelsize=12;3
 font-2 = Hack Nerd Font:pixelsize=12;3
 
-;font-0 = NotoSans Nerd Font:pixelsize=14;0
-;font-0 = SauceCodePro Nerd Font:pixelsize=12;0
-;font-1 = Hack Nerd Font Mono=15;0
-;font-2 = Hack Nerd Font =15;0
 
 modules-left = i3 xwindow
-modules-center = mpd
+modules-center = mpd player-playerctl
 ;testing less modules for a cleaner look
 ;modules-right = filesystem pulseaudio memory cpu eth date powermenu
 modules-right = pulseaudio date powermenu
@@ -326,6 +300,11 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 ; Separator in between workspaces
 ; label-separator = |
 
+# Custom Module for spotify that I am developing(Incomplete)
+[module/player-playerctl]
+type = custom/script
+exec = ~/.scripts/player-playerctl.sh
+interval = 5
 
 [module/mpd]
 type = internal/mpd
