@@ -59,17 +59,23 @@ bindsym $mod+Ctrl+m exec pavucontrol
 # bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
 # bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
-# Media Player Controls
-bindsym XF86AudioPlay exec mpc toggle
-#bindsym XF86AudioPause exec mpc pause
-bindsym XF86AudioNext exec mpc next
-bindsym XF86AudioPrev exec mpc prev
+# MPD + Playerctl Controls 
+bindsym XF86AudioPlay exec mpc toggle && playerctl play-pause
+bindsym XF86AudioNext exec mpc next && playerctl next
+bindsym XF86AudioPrev exec mpc prev && playerctl previous
+
+# Playerctl Controls 
+#bindsym XF86AudioPlay exec playerctl play-pause 
+#bindsym XF86AudioNext exec playerctl next 
+#bindsym XF86AudioPrev exec playerctl previous 
+ 
+
 
 # Start Applications
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 bindsym $mod+F2 exec firefox
 bindsym $mod+F3 exec pcmanfm
-# bindsym $mod+F3 exec ranger
+bindsym $mod+Ctrl+F3 exec ranger
 bindsym $mod+Shift+F3 exec gksu pcmanfm
 bindsym $mod+F5 exec urxvt -e ncmpcpp
 bindsym $mod+t exec --no-startup-id pkill compton
@@ -143,7 +149,7 @@ bindsym $mod+a focus parent
 
 # Personal Scratchpad additions
 for_window [instance="dropdown"] floating enable
-for_window [instance="dropdown"] resize set 625 400 
+for_window [instance="dropdown"] resize set 800 500 
 for_window [instance="dropdown"] move scratchpad
  
 
@@ -342,7 +348,8 @@ exec_always --no-startup-id $HOME/.conky/Archbar/Conkypanel/startconky.sh
 exec_always --no-startup-id feh --bg-center "$(< "${HOME}/.cache/wal/wal")" ; compton -b
 exec_always --no-startup-id wal -g -i $HOME/Pictures/Walls/Wall.jpg -a 70 -n
 exec_always --no-startup-id wal -R
-exec_always --no-startup-id $HOME/.scripts/waldunst.sh
+# No Longer Needed 
+# exec_always --no-startup-id $HOME/.scripts/waldunst.sh
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
