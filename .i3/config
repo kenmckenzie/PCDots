@@ -168,8 +168,8 @@ set $ws2 2:2
 set $ws3 3:3
 set $ws4 4:4
 set $ws5 5:5
+set $ws6 6:6
 set $ws7 7:Misc2
-set $ws6 6:Misc1
 set $ws8 8:Misc3
 
 # Set workspace to monitors
@@ -179,7 +179,7 @@ workspace "2:2" output DVI-D-0
 workspace "3:3" output HDMI-A-0
 workspace "4:4" output DVI-D-0
 workspace "5:5" output HDMI-A-0
-# workspace "" output HDMI2
+workspace "6:6" output DVI-D-0
 # workspace "" output HDMI2
 # workspace "" output HDMI2
 # workspace "" output HDMI2
@@ -219,17 +219,24 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 # assign [class="Thunderbird"] $ws1
 assign [class="Firefox"] $ws2
 assign [class="Kodi"] $ws2
-assign [class="Pcmanfm"] $ws6
+assign [class="Pcmanfm"] $ws1
 assign [class="Steam"] $ws5
 assign [class="Atom"] $ws3
-assign [class="Spotify"] $ws4
-#assign [title="music"] $ws3
+#assign [class="Spotify"] $ws4
+for_window [class="Spotify"] move to workspace $ws4
+assign [class="Deluge"] $ws6
+assign [class="Transmission-gtk"] $ws6
+assign [instance="music"] $ws4
+assign [instance="torrent"] $ws6
+# for_window [instance="music"] $ws3
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="calamares"] floating enable border normal
 for_window [class="Clipgrab"] floating enable
 for_window [title="File Transfer*"] floating enable
 for_window [class="Galculator"] floating enable border pixel 1
+# testing
+for_window [class="Calc"] floating enable border pixel 1
 for_window [class="GParted"] floating enable border normal
 for_window [title="i3_help"] floating enable sticky enable border normal
 for_window [class="Lightdm-settings"] floating enable
@@ -251,9 +258,9 @@ for_window [class="Skype"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
-
+for_window [class="Lutris"] floating enable
 # steam shit
-for_window [class="^Steam$" title="^Friends$"] floating enable
+for_window [class="^Steam$" title="^Friends List$"] floating enable
 for_window [class="^Steam$" title="Steam - Update News"] floating enable
 for_window [class="^Steam$" title=".* - Chat"] floating enable
 for_window [class="^Steam$" title="^Settings$"] floating enable
@@ -328,7 +335,11 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
 exec --no-startup-id urxvt -name dropdown
+exec_always --no-startup-id urxvt -name music -e ncmpcpp 
+exec_always --no-startup-id urxvt -name torrent -e tremc
 exec --no-startup-id spotify
+#exec --no-startup-id transmission-gtk # Temp until i sort out daemon startup correctly
+exec --no-startup-id transmission-daemon #fixed as above
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
 # exec --no-startup-id start_conky_maia
