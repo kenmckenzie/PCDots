@@ -2,6 +2,8 @@
 ![Screenshot](screenshot/screenshot.png)
 My personal dotfiles for i3wm and sundry apps, terribly formatted at the moment as I've rushed through. Will change as time allows. Used on Manjaro i3wm so your mileage may vary on other distro's. (Although any arch based distro SHOULD work)
 
+I use user templates for Pywal extremely heavily. in other words. many of the config files are actually in the ~/.config/wal/Templates folder. they need to be copied to your
+equivalent folder and then symlinked to their usual locations for them to work. this applies to all apps starred below on the list
 
 # Applications Needed
 -i3wm gapps (Obviously)
@@ -10,7 +12,7 @@ My personal dotfiles for i3wm and sundry apps, terribly formatted at the moment 
 
 -ranger
 
--conky (If you want to use my config, needs to be symlinked from wal's template folder, also radeontop is a dependency)
+* -conky (radeontop is a dependency)
 
 -Polybar
 
@@ -18,19 +20,19 @@ My personal dotfiles for i3wm and sundry apps, terribly formatted at the moment 
 
 -wpgtk (Needed to theme gtk via pywal schemes)
 
--dunst (Create a symlink from the /.cache/Wal/dunstrc to the dunst config folder for theming to work
+* -dunst (Create a symlink from the /.cache/Wal/dunstrc to the dunst config folder for theming to work
 
 -nitrogen (for wallpapers, you can also use feh but i3 config will need to be edited)
 
 -urxvt
 
--Bash-it
+* -Bash-it/Fish (Am in the process of switching to fish )
 
 -Yay (not needed but manually building everythings a pain )
 
 -lx-appearance (Not strictly needed but makes config abit easier)
 
--Rofi
+* -Rofi
 
 -Playerctl
 
