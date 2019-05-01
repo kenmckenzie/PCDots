@@ -34,6 +34,9 @@ My personal dotfiles for i3wm and sundry apps, terribly formatted at the moment 
 
 -Playerctl
 
+-vim, I would highly recomend taking a look at the following vim config,https://github.com/amix/vimrc its damn good and easy to install even for novice's (or the lazy)
+
+
 Note that I predominantly use Hack Nerd Font so please make sure that is installed or
 adjust accordingly (Install nerd-fonts-complete off aur)
 
