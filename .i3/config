@@ -48,7 +48,7 @@ bindsym $mod+z exec --no-startup-id morc_menu
 
 exec --no-startup-id volumeicon
 #bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
-# Changed to fix pulseaudio being difficult 
+# Changed to fix pulseaudio being difficult
 exec --no-startup-id start-pulseaudio-x11
 #exec --no-startup-id pa-applet
 bindsym $mod+Ctrl+m exec pavucontrol
@@ -59,10 +59,10 @@ bindsym $mod+Ctrl+m exec pavucontrol
 # bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
 # bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
-# MPD + Playerctl Controls 
-bindsym XF86AudioPlay exec mpc toggle && playerctl play-pause
-bindsym XF86AudioNext exec mpc next && playerctl next
-bindsym XF86AudioPrev exec mpc prev && playerctl previous
+# MPD + Playerctl Controls
+bindsym XF86AudioPlay exec mpc toggle
+bindsym XF86AudioNext exec mpc next
+bindsym XF86AudioPrev exec mpc prev
 
 
 # Start Applications
@@ -92,7 +92,7 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-# Still keeping normal arrow keys as i'm still learning vim bindings 
+# Still keeping normal arrow keys as i'm still learning vim bindings
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -143,9 +143,9 @@ bindsym $mod+a focus parent
 
 # Personal Scratchpad additions
 for_window [instance="dropdown"] floating enable
-for_window [instance="dropdown"] resize set 800 500 
+for_window [instance="dropdown"] resize set 1650 1030
 for_window [instance="dropdown"] move scratchpad
- 
+for_window [instance="dropdown"] move position 260px 50px
 
 
 # move the currently focused window to the scratchpad
@@ -168,8 +168,8 @@ set $ws2 2:2
 set $ws3 3:3
 set $ws4 4:4
 set $ws5 5:5
-set $ws6 6:6
 set $ws7 7:Misc2
+set $ws6 6:Misc1
 set $ws8 8:Misc3
 
 # Set workspace to monitors
@@ -179,7 +179,7 @@ workspace "2:2" output DVI-D-0
 workspace "3:3" output HDMI-A-0
 workspace "4:4" output DVI-D-0
 workspace "5:5" output HDMI-A-0
-workspace "6:6" output DVI-D-0
+# workspace "" output HDMI2
 # workspace "" output HDMI2
 # workspace "" output HDMI2
 # workspace "" output HDMI2
@@ -219,16 +219,13 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 # assign [class="Thunderbird"] $ws1
 assign [class="Firefox"] $ws2
 assign [class="Kodi"] $ws2
-assign [class="Pcmanfm"] $ws1
+assign [class="Pcmanfm"] $ws6
 assign [class="Steam"] $ws5
 assign [class="Atom"] $ws3
-#assign [class="Spotify"] $ws4
+assign [class="Spotify"] $ws4
 for_window [class="Spotify"] move to workspace $ws4
-assign [class="Deluge"] $ws6
-assign [class="Transmission-gtk"] $ws6
-assign [instance="music"] $ws4
-assign [instance="torrent"] $ws6
-# for_window [instance="music"] $ws3
+#assign [class="music"] $ws3
+for_window [instance="music"] $ws3
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="calamares"] floating enable border normal
@@ -269,7 +266,7 @@ for_window [class="^Steam$" title=".* CD key"] floating enable
 for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
 for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
 for_window [class="^Steam$" title="Steam"] floating enable
-for_window [class="Wpg"] floating enable 
+for_window [class="Wpg"] floating enable
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
 
@@ -335,15 +332,10 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
 exec --no-startup-id urxvt -name dropdown
-exec_always --no-startup-id urxvt -name music -e ncmpcpp 
-exec_always --no-startup-id urxvt -name torrent -e tremc
+exec --no-startup-id urxvt -name music -e ncmpcpp
 exec --no-startup-id spotify
-#exec --no-startup-id transmission-gtk # Temp until i sort out daemon startup correctly
-exec --no-startup-id transmission-daemon #fixed as above
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
-# exec --no-startup-id start_conky_maia
-# exec --no-startup-id start_conky_green
 exec --no-startup-id xautolock -time 360 -locker blurlock
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
@@ -353,7 +345,7 @@ exec_always --no-startup-id $HOME/.scripts/startconky.sh
 exec_always --no-startup-id feh --bg-center "$(< "${HOME}/.cache/wal/wal")" ; compton -b
 exec_always --no-startup-id wal -g -i $HOME/Pictures/Walls/Wall.jpg -a 70 -n
 exec_always --no-startup-id wal -R
-# No Longer Needed 
+# No Longer Needed
 # exec_always --no-startup-id $HOME/.scripts/waldunst.sh
 
 # Color palette used for the terminal ( ~/.Xresources file )
