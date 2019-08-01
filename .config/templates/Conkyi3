@@ -1,0 +1,139 @@
+--[[ Original File from Dobbie03 on Deviantart (https://www.deviantart.com/dobbie03/art/Conky-Panel-Update-635022473)
+heavily modified by myself(Converted to new conky format and significant aestetic changes for 1920x1080 monitors,
+Please note that this will NOT work out of the box without some pretty heavy editing so please
+expect some configuration before it works, also this version REQUIRES pywal and needs to be put
+in ./.config/wal/templates folder and then symlinked to your normal conky folder]]
+
+--[[Todo list , re write file to look cleaner]]
+
+
+conky.config = {{
+
+	alignment = 'top_left',
+	background = true,
+--border_margin = '0',
+	border_width = 1,
+	default_color = '#ffffff',
+	default_bar_height = 5 ,
+	default_bar_width = 195,
+	double_buffer = true,
+  draw_outline = false,
+	draw_graph_borders = true,
+	draw_borders = false,
+	draw_shades = false,
+	gap_x = 10,
+	gap_y = 45,
+	maximum_width = 230,
+	minimum_width = 230, minimum_height = 0,
+	no_buffers = true,
+	uppercase = false,
+	override_utf8_locale = true,
+	own_window = true,
+	own_window_title = 'conky',
+	own_window_transparent = false,
+	own_window_colour = '000000',
+	own_window_argb_visual = true,
+	own_window_argb_value = 155,
+	own_window_type = 'override',
+	own_window_hints = 'undecorated,below,skip_taskbar,skip_pager',
+	own_window_class = 'conky',
+	text_buffer_size = 8000,
+	total_run_times = 0,
+	update_interval = 1,
+	use_xft = true,
+	xftalpha = 1.0,
+--xftfont Freesans:pixelsize=11
+	short_units = true,
+
+	lua_draw_hook_post = 'main_bars',
+-- Set all colors to be used, switched over to this to make admin MUCH easier(DONE)
+	own_window_colour = '#000000',
+	color1 = '{color1}',
+	color2 = '{color2}',
+	color3 = '{color3}',
+	color4 = '{color4}',
+
+
+}};
+
+conky.text = [[
+${{color1}}${{font Hack Nerd Font:size=45}}${{alignc}}
+#${{voffset -90}}${{color2}}${{font Monospace:pixelsize=18}}${{offset -45}}${{alignc}}Manjaro i3WM
+${{voffset -50}}${{color1}}${{font Monospace:pixelsize=11}}KERNEL ${{color3}}${{stippled_hr 2}}${{color2}}${{font Monospace Mono:pixelsize=11}}
+${{color2}}${{font Monospace:pixelsize=11}}${{kernel}}
+${{color1}}${{font Monospace:pixelsize=11}}DATE/TIME${{color3}}${{stippled_hr 2}}${{color2}}
+${{color2}}${{font Monospace:pixelsize=11}}${{time %A}}
+${{color1}}${{font Monospace:pixelsize=15}}${{time %I:%M %P }}${{color2}}${{font micro:pixelsize=11}}
+${{font snap:pixelsize=11}}${{time %B %d}}, ${{time %G}}
+#Alot of the below system configs are customised for my system eg:cpu temps and such, make sure to adjust accordingly
+#
+${{color1}}${{font Monospace:pixelsize=11}}SYSTEM ${{color3}}${{stippled_hr 2}}${{color2}}${{font Monospace Mono:pixelsize=11}}
+DISTRO: ${{alignr 10}}Manjaro Linux i3
+HOST: ${{alignr 10}}${{nodename}}
+UPTIME: ${{alignr 10}}${{uptime}}
+PROCESSOR: ${{alignr 10}}${{execi 100 lscpu | grep -i "model name" | cut -c 34-50}}
+#CPU LOAD: ${{alignr 10}}${{loadavg}}
+#MB TEMP: ${{alignr 10}}${{execi 15 sensors | tail -n 15 | grep -i "temp1" | cut -c 15-22}}
+#UPDATES:  ${{alignr 8}}${{color1}}${{color1}}${{execpi 3600 checkupdates | wc -l}}
+#${{color2}}${{font Hack Mono:pixelsize=12}}p ${{color1}}${{font Monospace:pixelsize=11}}DESKTOP ${{color3}}${{stippled_hr 2}}${{color2}}${{font Monospace Mono:pixelsize=11}}
+#DESKTOP: ${{desktop}}
+${{color1}}${{font Monospace:pixelsize=11}}NETWORK ${{color3}}${{stippled_hr 2}}${{color2}}${{font Monospace Mono:pixelsize=11}}
+
+UP: ${{upspeed enp27s0}}
+${{upspeedgraph enp27s0 15,220 color4 color4}}
+DOWN: ${{downspeed enp27s0}}
+${{downspeedgraph enp27s0 15,220- color4 color4}}
+TOTAL UP: ${{totalup enp27s0}}
+TOTAL DOWN: ${{totaldown enp27s0}}
+
+${{color1}}${{font Monospace:pixelsize=11}}CPU ${{color3}}${{stippled_hr 2}}${{color2}}
+
+${{font Monospace Mono:pixelsize=11}}${{cpu cpu0}}% ${{goto 25}}  ${{color4}}${{cpubar 5,190 cpu0}}${{color2}}
+CORE 1: ${{freq cpu1}}MHz   CORE 7: ${{freq cpu7}}MHz
+${{font Monospace:pixelsize=11}}${{cpu cpu1}}%${{goto 25}} ${{color4}}${{cpubar 5,75 cpu1}} ${{color2}}${{font micro:pixelsize=11}}${{font Monospace:pixelsize=11}} ${{cpu cpu7}}% ${{color4}} ${{goto 152}}${{cpubar 5,70 cpu7}}${{color2}}${{font Monospace Mono:pixelsize=11}}
+CORE 2: ${{freq cpu2}}MHz   CORE 8: ${{freq cpu8}}MHz
+${{font Monospace:pixelsize=11}}${{cpu cpu2}}%${{goto 25}} ${{color4}}${{cpubar 5,75 cpu2}} ${{color2}}${{font micro:pixelsize=11}}${{font Monospace:pixelsize=11}} ${{cpu cpu8}}% ${{color4}} ${{goto 152}}${{cpubar 5,70 cpu8}}${{color2}}${{font Monospace Mono:pixelsize=11}}
+CORE 3: ${{freq cpu3}}MHz   CORE 9: ${{freq cpu9}}MHz
+${{font Monospace:pixelsize=11}}${{cpu cpu3}}%${{goto 25}} ${{color4}}${{cpubar 5,75 cpu3}} ${{color2}}${{font micro:pixelsize=11}}${{font Monospace:pixelsize=11}} ${{cpu cpu9}}% ${{color4}} ${{goto 152}}${{cpubar 5,70 cpu9}}${{color2}}${{font Monospace Mono:pixelsize=11}}
+CORE 4: ${{freq cpu4}}MHz   CORE 10: ${{freq cpu10}}MHz
+${{font Monospace:pixelsize=11}}${{cpu cpu4}}%${{goto 25}} ${{color4}}${{cpubar 5,75 cpu4}} ${{color2}}${{font micro:pixelsize=11}}${{font Monospace:pixelsize=11}} ${{cpu cpu10}}% ${{color4}} ${{goto 152}}${{cpubar 5,70 cpu 10}}${{color2}}${{font Monospace Mono:pixelsize=11}}
+CORE 5: ${{freq cpu5}}MHz   CORE 11: ${{freq cpu11}}MHz
+${{font Monospace:pixelsize=11}}${{cpu cpu5}}%${{goto 25}} ${{color4}}${{cpubar 5,75 cpu5}} ${{color2}}${{font micro:pixelsize=11}}${{font Monospace:pixelsize=11}} ${{cpu cpu11}}% ${{color4}} ${{goto 152}}${{cpubar 5,70 cpu11}}${{color2}}${{font Monospace Mono:pixelsize=11}}
+CORE 6: ${{freq cpu6}}MHz   CORE 12: ${{freq cpu12}}MHz
+${{font Monospace:pixelsize=11}}${{cpu cpu6}}%${{goto 25}} ${{color4}}${{cpubar 5,75 cpu6}} ${{color2}}${{font micro:pixelsize=11}}${{font Monospace:pixelsize=11}} ${{cpu cpu12}}% ${{color4}} ${{goto 152}}${{cpubar 5,70 cpu12}}${{color2}}${{font Monospace Mono:pixelsize=11}}
+CPU TEMP: ${{alignr 10}}${{execp sensors k10temp-pci-00c3 | grep 'Tdie' | cut -c16-17}} °C
+FAN SPEED: ${{alignr 10}}${{execi 15 sensors | grep -i "fan1" | cut -c 14-21}}
+
+# Depreciated, no longer a safe non root method to read the settings
+#${{color1}}${{font Monospace:pixelsize=11}}GPU ${{color3}}${{stippled_hr 2}}${{color2}}${{font Monospace Mono:pixelsize=11}}
+#
+#${{font Monospace:pixelsize=11}}${{color2}}${{execi 5 radeontop -d- -l1 | grep -o 'gpu [0-9]\{{1,3\}}' | cut -c 5-7 }}% ${{goto 25}}${{color4}}${{execibar 5 radeontop -d- -l1 | grep -o 'gpu [0-9]\{{1,3\}}' | cut -c 5-7 }}
+#${{color2}}GPU TEMP: ${{alignr 10}}${{execi 15 sensors | head -n 10 | grep -i "temp1" | cut -c 15-22}}
+
+${{color1}}${{font Monospace:pixelsize=11}}MEMORY ${{color3}}${{stippled_hr 2}}${{color2}}${{font Monospace Mono:pixelsize=11}}
+
+${{mem}}/${{memmax}}${{font Monospace:pixelsize=11}} ${{memperc}}%${{font micro:pixelsize=11}} ${{color4}}${{membar 5,110}}${{color2}}
+
+${{font Monospace:pixelsize=11}}${{top_mem name 1}}${{alignr 10}}${{top_mem mem 1}}%
+${{font Monospace:pixelsize=11}}${{top_mem name 2}}${{alignr 10}}${{top_mem mem 2}}%
+${{font Monospace:pixelsize=11}}${{top_mem name 3}}${{alignr 10}}${{top_mem mem 3}}%
+${{font Monospace:pixelsize=11}}${{top_mem name 4}}${{alignr 10}}${{top_mem mem 4}}%
+${{font Monospace:pixelsize=11}}${{top_mem name 5}}${{alignr 10}}${{top_mem mem 5}}%
+${{font Monospace:pixelsize=11}}${{top_mem name 6}}${{alignr 10}}${{top_mem mem 6}}%
+${{font Monospace:pixelsize=11}}${{top_mem name 7}}${{alignr 10}}${{top_mem mem 7}}%
+
+${{color1}}${{font Monospace:pixelsize=11}}DISCS ${{color3}}${{stippled_hr 2}}${{color2}}${{font Monospace Mono:pixelsize=11}}
+
+/Root: ${{fs_used /}}/${{fs_size /}}
+${{font Monospace:pixelsize=11}}${{fs_used_perc /}}%${{color4}} ${{fs_bar 5,185 /}}${{font Monospace Mono:pixelsize=11}}${{color2}}
+/Home: ${{fs_used /home}}/${{fs_free /home}}
+${{font Monospace:pixelsize=11}}${{fs_used_perc /home}}%${{color4}} ${{fs_bar 5,185 /home}}${{font Monospace Mono:pixelsize=11}}${{color2}}
+/Misc: ${{fs_used /mnt/Misc}}/${{fs_size /mnt/Misc}}
+${{font Monospace:pixelsize=11}}${{fs_used_perc /mnt/Misc}}%${{color4}} ${{fs_bar 5,185 /mnt/Misc}}${{font Monospace Mono:pixelsize=11}}${{color2}}
+/Media: ${{fs_used /mnt/Media}}/${{fs_size /mnt/Media}}
+${{font Monospace:pixelsize=11}}${{fs_used_perc /mnt/Media}}%${{color4}} ${{fs_bar 5,185 /mnt/Media}}${{font Monospace Mono:pixelsize=11}}${{color2}}
+/Extra: ${{fs_used /mnt/Extra}}/${{fs_size /mnt/Extra}}
+${{font Monospace:pixelsize=11}}${{fs_used_perc /mnt/Extra}}%${{color4}} ${{fs_bar 5,185 /mnt/Extra}}${{font Monospace Mono:pixelsize=11}}${{color2}}
+/Steam: ${{fs_used /mnt/Steam}}/${{fs_size /mnt/Steam}}
+${{font Monospace:pixelsize=11}}${{fs_used_perc /mnt/Steam}}%${{color4}} ${{fs_bar 5,185 /mnt/Steam}}${{font Monospace Mono:pixelsize=11}}${{color2}}
+]];
