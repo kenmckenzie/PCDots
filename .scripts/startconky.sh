@@ -1,6 +1,5 @@
 #!/bin/bash
-
-killall conky
+#Start Conky on i3wm
+# killall conky
 cd $HOME/.conky/Archbar/Conkypanel
-conky -c ./Conkymain
-
+conky -c ./Conkyi3
