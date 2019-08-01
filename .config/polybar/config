@@ -63,7 +63,8 @@ font-2 = Hack Nerd Font:pixelsize=12;3
 
 
 modules-left = i3 xwindow
-modules-center = mpd player-playerctl
+modules-center = spotify mpd
+# removing to test better method  player-playerctl
 modules-right = pulseaudio date powermenu
 tray-position = right
 tray-padding = 2
@@ -119,7 +120,8 @@ font-2 = Hack Nerd Font:pixelsize=12;3
 
 
 modules-left = i3 xwindow
-modules-center = mpd player-playerctl
+modules-center =  spotify mpd
+# See above comment player-playerctl
 modules-right = pulseaudio date powermenu
 tray-position = right
 tray-padding = 2
@@ -175,7 +177,9 @@ font-2 = Hack Nerd Font:pixelsize=12;3
 
 
 modules-left = i3 xwindow
-modules-center = mpd player-playerctl
+modules-center = mpd
+;player-playerctl
+
 ;testing less modules for a cleaner look
 ;modules-right = filesystem pulseaudio memory cpu eth date powermenu
 modules-right = pulseaudio date powermenu
@@ -300,7 +304,18 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 ; Separator in between workspaces
 ; label-separator = |
 
+[module/spotify]
+type = custom/script
+interval = 1
+format-prefix = " "
+format = <label>
+exec = python ~/.scripts/spotify_status.py -f '{artist}: {song}'
+#format-underline = #1db954
+
+
+
 # Custom Module for spotify that I am developing(Incomplete)
+
 [module/player-playerctl]
 type = custom/script
 exec = ~/.scripts/player-playerctl.sh
