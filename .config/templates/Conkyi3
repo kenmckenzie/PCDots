@@ -103,7 +103,6 @@ CORE 6: ${{freq cpu6}}MHz   CORE 12: ${{freq cpu12}}MHz
 ${{font Monospace:pixelsize=11}}${{cpu cpu6}}%${{goto 25}} ${{color4}}${{cpubar 5,75 cpu6}} ${{color2}}${{font micro:pixelsize=11}}${{font Monospace:pixelsize=11}} ${{cpu cpu12}}% ${{color4}} ${{goto 152}}${{cpubar 5,70 cpu12}}${{color2}}${{font Monospace Mono:pixelsize=11}}
 CPU TEMP: ${{alignr 10}}${{execp sensors k10temp-pci-00c3 | grep 'Tdie' | cut -c16-17}} °C
 FAN SPEED: ${{alignr 10}}${{execi 15 sensors | grep -i "fan1" | cut -c 14-21}}
-
 # Depreciated, no longer a safe non root method to read the settings
 #${{color1}}${{font Monospace:pixelsize=11}}GPU ${{color3}}${{stippled_hr 2}}${{color2}}${{font Monospace Mono:pixelsize=11}}
 #
@@ -113,14 +112,13 @@ FAN SPEED: ${{alignr 10}}${{execi 15 sensors | grep -i "fan1" | cut -c 14-21}}
 ${{color1}}${{font Monospace:pixelsize=11}}MEMORY ${{color3}}${{stippled_hr 2}}${{color2}}${{font Monospace Mono:pixelsize=11}}
 
 ${{mem}}/${{memmax}}${{font Monospace:pixelsize=11}} ${{memperc}}%${{font micro:pixelsize=11}} ${{color4}}${{membar 5,110}}${{color2}}
-
 ${{font Monospace:pixelsize=11}}${{top_mem name 1}}${{alignr 10}}${{top_mem mem 1}}%
 ${{font Monospace:pixelsize=11}}${{top_mem name 2}}${{alignr 10}}${{top_mem mem 2}}%
 ${{font Monospace:pixelsize=11}}${{top_mem name 3}}${{alignr 10}}${{top_mem mem 3}}%
 ${{font Monospace:pixelsize=11}}${{top_mem name 4}}${{alignr 10}}${{top_mem mem 4}}%
 ${{font Monospace:pixelsize=11}}${{top_mem name 5}}${{alignr 10}}${{top_mem mem 5}}%
-${{font Monospace:pixelsize=11}}${{top_mem name 6}}${{alignr 10}}${{top_mem mem 6}}%
-${{font Monospace:pixelsize=11}}${{top_mem name 7}}${{alignr 10}}${{top_mem mem 7}}%
+#${{font Monospace:pixelsize=11}}${{top_mem name 6}}${{alignr 10}}${{top_mem mem 6}}%
+#${{font Monospace:pixelsize=11}}${{top_mem name 7}}${{alignr 10}}${{top_mem mem 7}}%
 
 ${{color1}}${{font Monospace:pixelsize=11}}DISCS ${{color3}}${{stippled_hr 2}}${{color2}}${{font Monospace Mono:pixelsize=11}}
 
@@ -136,4 +134,8 @@ ${{font Monospace:pixelsize=11}}${{fs_used_perc /mnt/Media}}%${{color4}} ${{fs_b
 ${{font Monospace:pixelsize=11}}${{fs_used_perc /mnt/Extra}}%${{color4}} ${{fs_bar 5,185 /mnt/Extra}}${{font Monospace Mono:pixelsize=11}}${{color2}}
 /Steam: ${{fs_used /mnt/Steam}}/${{fs_size /mnt/Steam}}
 ${{font Monospace:pixelsize=11}}${{fs_used_perc /mnt/Steam}}%${{color4}} ${{fs_bar 5,185 /mnt/Steam}}${{font Monospace Mono:pixelsize=11}}${{color2}}
+/Win: ${{fs_used /mnt/Win}}/${{fs_size /mnt/Win}}
+${{font Monospace:pixelsize=11}}${{fs_used_perc /mnt/Win}}%${{color4}} ${{fs_bar 5,185 /mnt/Win}}${{font Monospace Mono:pixelsize=11}}${{color2}}
+/Dump: ${{fs_used /mnt/Dump}}/${{fs_size /mnt/Dump}}
+${{font Monospace:pixelsize=11}}${{fs_used_perc /mnt/Dump}}%${{color4}} ${{fs_bar 5,185 /mnt/Dump}}${{font Monospace Mono:pixelsize=11}}${{color2}}
 ]];
