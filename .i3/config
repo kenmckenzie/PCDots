@@ -68,9 +68,10 @@ bindsym XF86AudioPrev exec mpc prev
 # Start Applications
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 bindsym $mod+F2 exec firefox
-bindsym $mod+F3 exec pcmanfm
+bindsym $mod+F3 exec thunar
 bindsym $mod+Ctrl+F3 exec ranger
-bindsym $mod+Shift+F3 exec gksu pcmanfm
+bindsym $mod+F4 exec code # visual studio code
+bindsym $mod+Shift+F3 exec gksu thunar
 bindsym $mod+F5 exec urxvt -e ncmpcpp
 bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
@@ -324,6 +325,7 @@ mode "resize" {
 bindsym $mod+9 exec --no-startup-id blurlock
 
 # Autostart applications
+exec_always --no-startup-id wal -R
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # exec --no-startup-id --restore ; sleep 1; compton -b
 # exec --no-startup-id manjaro-hello
@@ -333,7 +335,8 @@ exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
 exec --no-startup-id urxvt -name dropdown
 exec --no-startup-id urxvt -name music -e ncmpcpp
-exec --no-startup-id spotify
+#exec --no-startup-id spotify
+exec --no-startup-id devilspie
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
 exec --no-startup-id xautolock -time 360 -locker blurlock
@@ -341,10 +344,9 @@ exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 # exec --no-startup-id /home/ulverza/Pictures/Walls/Nier.jpg
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec_always --no-startup-id $HOME/.scripts/startconky.sh
+exec_always --no-startup-id $HOME/.scripts/startconkyi3.sh
 exec_always --no-startup-id feh --bg-center "$(< "${HOME}/.cache/wal/wal")" ; compton -b
-exec_always --no-startup-id wal -g -i $HOME/Pictures/Walls/Wall.jpg -a 70 -n
-exec_always --no-startup-id wal -R
+#exec_always --no-startup-id wal -g -i $HOME/Pictures/Walls/Wall.jpg -a 70 -n
 # No Longer Needed
 # exec_always --no-startup-id $HOME/.scripts/waldunst.sh
 
