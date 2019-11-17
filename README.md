@@ -1,6 +1,6 @@
 # i3wmDots
 ![Screenshot](screenshot/screenshot.png)
-My personal dotfiles for i3wm and sundry apps, terribly formatted at the moment as I've rushed through. Will change as time allows. Used on Manjaro i3wm so your mileage may vary on other distro's. (Although any arch based distro SHOULD work)
+My personal dotfiles for i3wm and sundry apps. Used on Manjaro i3wm so your mileage may vary on other distro's. (Although any arch based distro SHOULD work)
 
 I use user templates for Pywal extremely heavily. in other words. many of the config files are actually in the ~/.config/wal/Templates folder. they need to be copied to your
 equivalent folder and then symlinked to their usual locations for them to work. this applies to all apps starred below on the list
@@ -18,7 +18,7 @@ equivalent folder and then symlinked to their usual locations for them to work. 
 
 -Pywal(By far the most important, I love this app)
 
--wpgtk (Needed to theme gtk via pywal schemes)
+-wpgtk (Needed to theme gtk via pywal schemes) I dont personally use it anymore however
 
 * -dunst (Create a symlink from the /.cache/Wal/dunstrc to the dunst config folder for theming to work
 
@@ -26,7 +26,7 @@ equivalent folder and then symlinked to their usual locations for them to work. 
 
 -urxvt
 
-* -Bash-it/Fish (Am in the process of switching to fish )
+- zsh + oh-my-zsh
 
 -Yay (not needed but manually building everythings a pain )
 
@@ -40,6 +40,6 @@ equivalent folder and then symlinked to their usual locations for them to work. 
 
 
 Note that I predominantly use Hack Nerd Font so please make sure that is installed or
-adjust accordingly (Install nerd-fonts-complete off aur)
+adjust accordingly (The fonts I use are included) 
 
 
