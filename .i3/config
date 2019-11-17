@@ -36,11 +36,15 @@ bindsym $mod+q kill
 
 # start program launcher
 #bindsym $mod+d exec --no-startup-id dmenu_recency
-#Rofi Startup
-bindsym $mod+d exec --no-startup-id rofi -show run
-
-# launch categorized menu
-bindsym $mod+z exec --no-startup-id morc_menu
+# Rofi Startup, run mode for quick startup
+bindsym $mod+d exec --no-startup-id "rofi -modi 'window,run,ssh,drun' -show run"  
+# Rofi but window mode for mod tab, works well 
+bindsym $mod+Tab exec --no-startup-id "rofi -modi 'window,run,ssh,drun' -show window" 
+# launch categorized menu, changed from morc_menu to a rofi based script
+bindsym $mod+z exec --no-startup-id rofimenu
+# bindsym $mod+z exec --no-startup-id morc_menu
+# launch htop 
+bindsym Ctrl+Shift+Escape exec urxvt -e htop
 
 ################################################################################################
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
@@ -325,6 +329,7 @@ mode "resize" {
 bindsym $mod+9 exec --no-startup-id blurlock
 
 # Autostart applications
+exec_always --no-startup-id feh --bg-center "$(< "${HOME}/.cache/wal/wal")" ; compton -b
 exec_always --no-startup-id wal -R
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # exec --no-startup-id --restore ; sleep 1; compton -b
@@ -333,8 +338,6 @@ exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
-exec --no-startup-id urxvt -name dropdown
-exec --no-startup-id urxvt -name music -e ncmpcpp
 #exec --no-startup-id spotify
 exec --no-startup-id devilspie
 # exec --no-startup-id blueman-applet
@@ -342,10 +345,10 @@ exec --no-startup-id devilspie
 exec --no-startup-id xautolock -time 360 -locker blurlock
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
-# exec --no-startup-id /home/ulverza/Pictures/Walls/Nier.jpg
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id $HOME/.scripts/startconkyi3.sh
-exec_always --no-startup-id feh --bg-center "$(< "${HOME}/.cache/wal/wal")" ; compton -b
+exec --no-startup-id urxvt -name dropdown
+exec --no-startup-id urxvt -name music -e ncmpcpp
 #exec_always --no-startup-id wal -g -i $HOME/Pictures/Walls/Wall.jpg -a 70 -n
 # No Longer Needed
 # exec_always --no-startup-id $HOME/.scripts/waldunst.sh
