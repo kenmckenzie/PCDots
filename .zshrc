@@ -114,7 +114,8 @@ alias calc="galculator"                   # Calculator
 alias ra="ranger"
 alias quake="quakespasm -game id1"
 alias quakead="quakespasm -game"
-
+alias updateaur="yay -Syu"
+alias scripts="cd ~/.scripts"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -128,4 +129,5 @@ alias quakead="quakespasm -game"
 
 # To add support for TTYs this line can be optionally added.
 source ~/.cache/wal/colors-tty.sh
+
 
