@@ -1,6 +1,10 @@
 # i3wmDots
 ![Screenshot](screenshot/screenshot.png)
-My personal dotfiles for i3wm and sundry apps. Used on Manjaro i3wm so your mileage may vary on other distro's. (Although any arch based distro SHOULD work)
+
+This repo is extremely out of date as I have not used my desktop for some time, Please rather look at Laptopdots repo for my current rice
+It will be changed once I have access to my pc again
+
+My personal dotfiles for i3wm and sundry apps. Used on Manjaro so your mileage may vary on other distro's. (Although any arch based distro SHOULD work)
 
 I use user templates for Pywal extremely heavily. in other words. many of the config files are actually in the ~/.config/wal/Templates folder. they need to be copied to your
 equivalent folder and then symlinked to their usual locations for them to work. this applies to all apps starred below on the list
