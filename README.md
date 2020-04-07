@@ -1,4 +1,4 @@
-# PCDots`
+# PCDots
 ![Screenshot](screenshot/screenshot.png)
 
 This repo is extremely out of date as I have not used my desktop for some time, Please rather look at Laptopdots repo for my current rice
