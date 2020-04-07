@@ -24,6 +24,7 @@
     background: {background};
     foreground: {foreground};
     border-color: @background;
+    
 }}
 
 #window {{
@@ -31,12 +32,15 @@
     background-color: rgba(0, 0, 0, 0.30);
     border: 0;
     padding: 1.1ch;
+
+    
 }}
 
 #mainbox {{
     border: 0;
     padding: 0;
     background-color: transparent;
+    position: north;
 }}
 
 #message {{

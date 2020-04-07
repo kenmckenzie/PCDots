@@ -1,0 +1,121 @@
+--[[ Original File from Dobbie03 on Deviantart (https://www.deviantart.com/dobbie03/art/Conky-Panel-Update-635022473)
+heavily modified by myself(This version is used on my vnc xfce setup so set for lower resolutions and to be concise),
+Please note that this will NOT work out of the box without some pretty heavy editing so please
+expect some configuration before it works, also this version REQUIRES pywal and needs to be put
+in ./.config/wal/templates folder and then symlinked to your normal conky folder]]
+
+--[[Todo list , re write file to look cleaner]]
+
+
+conky.config = {{
+
+	alignment = 'top_left',
+	background = true,
+--border_margin = '0',
+	border_width = 1,
+	default_color = '#ffffff',
+	default_bar_height = 5 ,
+	default_bar_width = 195,
+	double_buffer = true,
+  draw_outline = false,
+	draw_graph_borders = true,
+	draw_borders = false,
+	draw_shades = false,
+	gap_x = 10,
+	gap_y = 45,
+	maximum_width = 230,
+	minimum_width = 230, minimum_height = 0,
+	no_buffers = true,
+	uppercase = false,
+	override_utf8_locale = true,
+	own_window = true,
+	own_window_title = 'Conky',
+	own_window_transparent = false,
+	own_window_colour = '000000',
+	own_window_argb_visual = true,
+	own_window_argb_value = 155,
+	own_window_type = 'override',
+	own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+	own_window_class = 'conky',
+	text_buffer_size = 8000,
+	total_run_times = 0,
+	update_interval = 10,
+	use_xft = true,
+    font = 'Hack Nerd Font Mono:bold:size=8',
+	xftalpha = 1.0,
+--xftfont Freesans:pixelsize=16
+	short_units = true,
+	xinerama_head = 1,
+	lua_draw_hook_post = 'main_bars',
+-- Set all colors to be used, switched over to this to make admin MUCH easier(DONE)
+	own_window_colour = '#000000',
+	color1 = '{color1}',
+	color2 = '{color2}',
+	color3 = '{color3}',
+	color4 = '{color4}',
+
+
+}};
+
+conky.text = [[
+${{color1}}${{font Hack Nerd Font:size=45}}${{alignc}}${{offset -10}}
+${{voffset -40}}${{color1}}${{font Hack Nerd Font Mono:pixelsize=16}}DATE/TIME ${{color3}}${{hr 2}}${{color2}}
+${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}${{time %A}}${{alignr}}${{font Hack Nerd Font Mono:pixelsize=16}}${{time %B %d}},${{time %G}}
+${{color1}}${{font Hack Nerd Font Mono:pixelsize=17}}${{alignc}}${{offset 5}}${{time %I:%M %P }}${{color2}}
+#Alot of the below system configs are customised for my system eg:cpu temps and such, make sure to adjust accordingly
+#
+
+${{color1}}${{font Hack Nerd Font Mono:pixelsize=16}}SYSTEM ${{color3}}${{hr 2}}${{color2}}${{font Hack Nerd Font Mono Mono:pixelsize=16}}
+${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}DISTRO: ${{alignr}}Arch Linux
+${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}KERNEL: ${{alignr}}${{kernel}}
+${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}HOST: ${{alignr}}${{nodename}}
+${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}UPTIME: ${{alignr}}${{uptime}}
+${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}PROCESSOR: ${{alignr}}${{execi 100 lscpu | grep -i "model name" | cut -c 52-80}}
+
+#CPU LOAD: ${{alignr 10}}${{loadavg}}
+#MB TEMP: ${{alignr 10}}${{execi 15 sensors | tail -n 15 | grep -i "temp1" | cut -c 15-22}}
+#UPDATES:  ${{alignr 8}}${{color1}}${{color1}}${{execpi 3600 checkupdates | wc -l}}
+#${{color2}}${{font Hack Mono:pixelsize=12}}p ${{color1}}${{font Hack Nerd Font Mono:pixelsize=16}}DESKTOP ${{color3}}${{hr 2}}${{color2}}${{font Hack Nerd Font Mono Mono:pixelsize=16}}
+#DESKTOP: ${{desktop}}  
+${{color1}}${{font Hack Nerd Font Mono:pixelsize=16}}NETWORK ${{color3}}${{hr 2}}${{color2}}${{font Hack Nerd Font Mono Mono:pixelsize=16}}
+${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}UP: ${{alignr}}${{upspeed enp0s31f6}}
+${{upspeedgraph enp0s31f6 15,230 color1 color1}}
+${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}DOWN: ${{alignr}}${{downspeed enp0s31f6}}
+${{downspeedgraph enp0s31f6 15,230- color1 color1}}
+${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}TOTAL UP: ${{alignr}}${{totalup enp0s31f6}}
+${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}TOTAL DOWN: ${{alignr}}${{totaldown enp0s31f6}}
+
+${{color1}}${{font Hack Nerd Font Mono:pixelsize=16}}CPU ${{color3}}${{hr 2}}${{color2}}
+${{font Hack Nerd Font Mono Mono:pixelsize=16}}${{cpu cpu0}}% ${{goto 35}}  ${{color4}}${{cpubar 5,190 cpu0}}${{color2}}
+${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}CORE 1: ${{alignr}}${{freq cpu1}}MHz
+${{font Hack Nerd Font Mono:pixelsize=16}}${{cpu cpu1}}%${{goto 35}} ${{color4}}${{cpubar 5,190 cpu1}}${{color2}} 
+${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}CORE 2: ${{alignr}}${{freq cpu2}}MHz
+${{font Hack Nerd Font Mono:pixelsize=16}}${{cpu cpu2}}%${{goto 35}} ${{color4}}${{cpubar 5,190 cpu2}}${{color2}}
+${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}CORE 3: ${{alignr}}${{freq cpu3}}MHz
+${{font Hack Nerd Font Mono:pixelsize=16}}${{cpu cpu3}}%${{goto 35}} ${{color4}}${{cpubar 5,190 cpu3}}${{color2}} 
+${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}CORE 4: ${{alignr}}${{freq cpu4}}MHz
+${{font Hack Nerd Font Mono:pixelsize=16}}${{cpu cpu4}}%${{goto 35}} ${{color4}}${{cpubar 5,190 cpu4}}${{color2}} 
+CPU TEMP: ${{alignr}}${{execp sensors | tail -n 15 | grep -i "Core 0" | cut -c 17-20}} °C
+#FAN SPEED: ${{alignr}}${{execi 15 sensors | grep -i "fan1" | cut -c 14-21}}
+
+#${{color1}}${{font Hack Nerd Font Mono:pixelsize=16}}GPU ${{color3}}${{hr 2}}${{color2}}${{font Hack Nerd Font Mono Mono:pixelsize=16}}
+#
+#${{font Hack Nerd Font Mono:pixelsize=16}}${{color2}}${{execi 5 radeontop -d- -l1 | grep -o 'gpu [0-9]\{{1,3\}}' | cut -c 5-7 }}% ${{goto 25}}${{color4}}${{execibar 5 radeontop -d- -l1 | grep -o 'gpu [0-9]\{{1,3\}}' | cut -c 5-7 }}
+#${{color2}}GPU TEMP: ${{alignr 10}}${{execi 15 sensors | head -n 10 | grep -i "temp1" | cut -c 15-22}}
+#
+${{color1}}${{font Hack Nerd Font Mono:pixelsize=16}}MEMORY ${{color3}}${{hr 2}}${{color2}}${{font Hack Nerd Font Mono Mono:pixelsize=16}}
+${{font Hack Nerd Font Mono:pixelsize=16}}Used/Total: ${{alignr}}${{mem}}/${{memmax}}
+${{memperc}}%${{font Hack Nerd Font Mono:pixelsize=16}} ${{alignr}}${{color4}}${{membar 5,190}}${{color2}}
+${{font Hack Nerd Font Mono:pixelsize=16}}${{top_mem name 1}}${{alignr 10}}${{top_mem mem 1}}%
+${{font Hack Nerd Font Mono:pixelsize=16}}${{top_mem name 2}}${{alignr 10}}${{top_mem mem 2}}%
+${{font Hack Nerd Font Mono:pixelsize=16}}${{top_mem name 3}}${{alignr 10}}${{top_mem mem 3}}%
+${{font Hack Nerd Font Mono:pixelsize=16}}${{top_mem name 4}}${{alignr 10}}${{top_mem mem 4}}%
+${{font Hack Nerd Font Mono:pixelsize=16}}${{top_mem name 5}}${{alignr 10}}${{top_mem mem 5}}%
+#${{font Hack Nerd Font Mono:pixelsize=16}}${{top_mem name 6}}${{alignr 10}}${{top_mem mem 6}}%
+
+${{color1}}${{font Hack Nerd Font Mono:pixelsize=16}}DISCS ${{color3}}${{hr 2}}${{color2}}${{font Hack Nerd Font Mono Mono:pixelsize=16}}
+${{font Hack Nerd Font Mono:pixelsize=16}}/Root: ${{alignr}}${{fs_used /}}/${{fs_size /}}
+${{font Hack Nerd Font Mono:pixelsize=16}}${{fs_used_perc /}}%${{color4}} ${{fs_bar 5,190 /}}${{font Hack Nerd Font Mono Mono:pixelsize=16}}${{color2}}
+${{font Hack Nerd Font Mono:pixelsize=16}}/Home: ${{alignr}}${{fs_used /home}}/${{fs_free /home}}
+${{font Hack Nerd Font Mono:pixelsize=16}}${{fs_used_perc /home}}%${{color4}} ${{fs_bar 5,190 /home}}${{font Hack Nerd Font Mono Mono:pixelsize=16}}${{color2}}
+]];
