@@ -1,0 +1,1 @@
+Symlink rofimenu.rasi from wal's cache folder once it has been run once

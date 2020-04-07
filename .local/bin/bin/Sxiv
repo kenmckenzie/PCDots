@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Script to use setbg in sxiv in order to set wallpaper via gui, set the pictures folder to wherever your pictures are 
+# Requires sxiv 
+
+thmfp=$(sxiv -otb ~/Pictures/)
+[ ! "$thmfp" ] && exit
+setbg $thmfp

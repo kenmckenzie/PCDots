@@ -1,0 +1,6 @@
+#!/bin/sh
+
+cd ~/Repos/st-flexipatch/
+rm -f ./config.h
+sudo make clean install
+

@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# Simple Script to show volume 
+
+vol="$(pamixer --get-volume)"
+
+if [ "$vol" -gt 70 ]; then
+	icon="墳"
+elif [ "$vol" -lt 30 ]; then
+	icon="奔"
+
+else 
+	icon="奄"	
+fi
+
+printf "%s - %s%%" "$icon" "$vol"
+
+
+
