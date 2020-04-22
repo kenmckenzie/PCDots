@@ -1,0 +1,25 @@
+[Added Associations]
+x-scheme-handler/magnet=torrent.desktop;
+application/x-bittorrent=torrent.desktop;
+text/x-chdr=atom.desktop;code-oss.desktop;vim.desktop;
+application/x-partial-download=userapp-"mpv"-UQ65H0.desktop;
+text/x-csrc=code-oss.desktop;vim.desktop;
+application/x-shellscript=atom.desktop;code-oss.desktop;vim.desktop;
+text/x-python=code-oss.desktop;vim.desktop;
+text/x-makefile=code-oss.desktop;
+application/x-trash=code-oss.desktop;
+application/x-ms-dos-executable=wine.desktop;
+image/png=sxiv.desktop;
+text/plain=code-oss.desktop;atom.desktop;
+application/x-iwork-keynote-sffkey=atom.desktop;
+
+
+
+[Default Applications]
+text/plain=atom.desktop
+x-scheme-handler/discord-478576776990425110=discord-478576776990425110.desktop
+x-scheme-handler/http=brave.desktop;
+x-scheme-handler/https=brave.desktop;
+x-scheme-handler/ftp=brave.desktop;
+x-scheme-handler/magnet=torrent.desktop
+application/x-bittorrent=torrent.desktop;

@@ -13,6 +13,7 @@ export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export XDG_CACHE_HOME="$HOME"/.cache
 export XDG_CONFIG_HOME="$HOME"/.config
 export XDG_DATA_HOME="$HOME"/.local/share
+export ATOM_HOME="$XDG_DATA_HOME"/atom
 
 alias wget="wget --hsts-file=$XDG_CACHE_HOME/wget-hsts"
 
@@ -23,9 +24,10 @@ export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME"/bundle
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export ELINKS_CONFDIR="$XDG_CONFIG_HOME"/elinks
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+
 ...
 # Path change
-#export PATH="$HOME/.local/bin/"
+# export PATH="$HOME/.local/bin/"
 
 # If user ID is greater than or equal to 1000 & if ~/bin exists and is a directory & if ~/bin is not already in your $PATH
 # then export ~/.local/bin to your $PATH.

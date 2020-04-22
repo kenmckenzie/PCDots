@@ -1,7 +1,9 @@
 #!/bin/sh
-
+# Shows an icon with internet status, also connects to vpn 
+# TODO fix icons
 case $BLOCK_BUTTON in
 	1) $TERMINAL -e nmtui ;;
+	2) nmcli connection up Linode\ Wireguard >/dev/null 2>/dev/null && notify-send "VPN Connected" ;;
 	3) pgrep -x dunst >/dev/null && notify-send "🌐 Internet module" "\- Click to connect
 📡: no wifi connection
 📶: wifi connection with quality
@@ -10,7 +12,8 @@ case $BLOCK_BUTTON in
 " ;;
 esac
 
-[ "$(cat /sys/class/net/w*/operstate)" = 'down' ] && wifiicon="📡" ||
-	wifiicon=$(grep "^\s*w" /proc/net/wireless | awk '{ print "📶", int($3 * 100 / 70) "%" }')
+[ "$(cat /sys/class/net/w*/operstate)" = 'down' ] && wifiicon="" ||
+	wifiicon=$(grep "^\s*w" /proc/net/wireless | awk '{ print "", int($3 * 100 / 70) "%" }')
 
-printf "%s %s\n" "$wifiicon" "$(sed "s/down/❎/;s/up/🌐/" /sys/class/net/e*/operstate)"
+printf "%s %s\n" "$wifiicon" "$(sed "s/down/ /;s/up/ﯱ /" /sys/class/net/e*/operstate)"
+
