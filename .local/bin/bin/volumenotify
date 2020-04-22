@@ -1,20 +1,19 @@
 #!/bin/bash
-# changeVolume script, pulseaudio and pamixer required
-# Bind this to your media keys for volume control with notifications 
+# changeVolume script, pulseaudio pulsemixer pamixer  & dunstify required
+
 # Arbitrary but unique message id
 msgId="991049"
 
 # Change the volume using pactl
-pactl set-sink-volume @DEFAULT_SINK@ "$@" > /dev/null
-
+#pactl set-sink-volume @DEFAULT_SINK@ "$@" > /dev/null
+pulsemixer --change-volume "$@" > /dev/null
 # Query pamixer for the current volume and whether or not the speaker is muted
 volume="$(pamixer --get-volume)"
 mute="$(pamixer  --get-mute)"
 # If @ 100 % , keep it from going over to avoid clipping 
-# Todo, clear notifications first to avoid it repeating itself 
 if [[ $volume -gt 100 ]]; then 
-pactl set-sink-volume @DEFAULT_SINK@ 100% > /dev/null && notify-send "Volume Maxed" 
-
+#pactl set-sink-volume @DEFAULT_SINK@ 100% > /dev/null && dunstify -a "changeVolume" -u low  -r "$msgid" "Volume Maxed"
+pulsemixer --set-volume 100 > /dev/null && dunstify -a "changeVolume" -u low -r "$msgId" "Volume Maxed"
 
 elif [[ $volume == 0 || "$mute" == "true" ]]; then
     # Show the sound muted notification
@@ -25,3 +24,5 @@ else
     "Volume: ${volume}%" "$(getProgressString 10 "<b> </b>" " " $volume)"
 fi
 
+# Play the volume changed sound, dont use it as its frankly stupid
+#canberra-gtk-play -i audio-volume-change -d "changeVolume"
