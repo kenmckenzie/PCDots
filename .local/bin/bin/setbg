@@ -4,12 +4,8 @@
 #	Run by itself, set the wallpaper (at X start).
 #	If given a file, set that as the new wallpaper.
 #	If given a directory, choose random file in it.
-#	If wal + wpgrk is installed, also generate a colorscheme
-#   Will also set gtk theme and Icons if installed, (use wpg-install.sh)
+#	If wal is installed, also generate a colorscheme.
 # chmod the /usr/share/pixmaps/wall folder if you want a wallpaper for lightdm
-# Ditto for gtk themes and icons, check the script,
-# Stolen from Lukesmithxyz but edited for my purposes
-
 # Location of link to wallpaper link.
 bgloc="${XDG_CACHE_HOME:-$HOME/.cache/}/bg"
 
