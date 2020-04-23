@@ -1,7 +1,0 @@
-#!/bin/sh
-
-cd ~/Repos/st/
-rm -f ./config.h
-rm -f ./patches.h
-sudo make clean install
-

@@ -1,7 +1,0 @@
-#!/bin/bash
-export WINEPREFIX="/home/ulveri3/.cemu/wine"
-#for cemuhook
-export WINEDLLOVERRIDES="mscoree=;mshtml=;dbghelp.dll=n,b"
-
-cd /home/ulveri3/.cemu
-mesa_glthread=true __GL_THREADED_OPTIMIZATIONS=1 vblank_mode=0 WINEESYNC=1 wine Cemu.exe "$@"

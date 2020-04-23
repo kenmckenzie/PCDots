@@ -1,5 +1,0 @@
-#!/bin/sh
-
-cd ~/Repos/dwm/
-rm ./config.h
-sudo make clean install

@@ -1,0 +1,19 @@
+
+#!/bin/sh
+
+thmfp=$(sxiv -otb ~/Pictures/)
+[ ! "$thmfp" ] && exit
+setbg $thmfp
+#newthm=$(basename $thmfp)
+#cp $thmfp ~/Pictures/Walls/wall.jpg 
+#cp $thmfp /usr/share/backgrounds/wall.jpg 
+#wpg -d wall.jpg 
+#wpg -a ~/Pictures/Walls/wall.jpg 
+#wpg -s wall.jpg -n
+#wal -i $thmfp -a 70 
+#cp /home/ulveri3/.cache/wal/.dmenurc /home/ulveri3/ 
+#~/.scripts/kdechangewall.sh
+
+# Keeping wpg syntax in case I want to switch back 
+# wpg -s $newthm
+#thmupd

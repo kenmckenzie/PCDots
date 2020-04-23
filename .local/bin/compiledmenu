@@ -1,0 +1,5 @@
+#!/bin/sh
+cd ~/Repos/dmenu/
+rm ./config.h
+rm ./patches.h
+sudo make clean install
