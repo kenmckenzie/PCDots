@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# glorified alias just to make youtube-dl abit easier to use
+
+youtube-dl -c "$@"
