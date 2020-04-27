@@ -15,7 +15,12 @@ bgloc="${XDG_CACHE_HOME:-$HOME/.cache/}/bg"
 
 # If pywal is installed, use it.
 wal -s -i "$(readlink -f "$bgloc")" -o "${XDG_CONFIG_HOME:-$HOME/.config}/wal/postrun" >/dev/null 2>&1
+# Creates a gtk theme using wpgtk and copies it to /usr/share for lightdm
 wpg -i wall.jpg ~/.cache/wal/colors.json
 wpg -s wall.jpg && cp -r $HOME/.local/share/themes/FlatColor/* /usr/share/themes/FlatColor/
+# Refresh Icon Cache while gui apps open
 gtk-update-icon-cache -f -t ~/.local/share/icons/flattrcolor
+# Automaticaly refresh dwmbar using a simulated keypress 
+pidof dwm >/dev/null && xdotool key super+shift+F5
+# Set wallpaper 
 xwallpaper --zoom "$bgloc"
