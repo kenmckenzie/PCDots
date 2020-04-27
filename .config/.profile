@@ -25,6 +25,11 @@ export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export ELINKS_CONFDIR="$XDG_CONFIG_HOME"/elinks
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 
+# GTK theme settings
+export GTK_THEME=FlatColor
+# Qt theme settings
+export QT_QPA_PLATFORMTHEME=qt5ct
+ 
 ...
 # Path change
 # export PATH="$HOME/.local/bin/"
