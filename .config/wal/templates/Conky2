@@ -1,23 +1,22 @@
+-- Conky config of Ken McKenzie (Ulverza)
+
 --[[ Original File from Dobbie03 on Deviantart (https://www.deviantart.com/dobbie03/art/Conky-Panel-Update-635022473)
-heavily modified by myself(This version is used on my vnc xfce setup so set for lower resolutions and to be concise),
+heavily modified by myself
 Please note that this will NOT work out of the box without some pretty heavy editing so please
 expect some configuration before it works, also this version REQUIRES pywal and needs to be put
 in ./.config/wal/templates folder and then symlinked to your normal conky folder]]
-
---[[Todo list , re write file to look cleaner]]
 
 
 conky.config = {{
 
 	alignment = 'top_left',
 	background = true,
---border_margin = '0',
 	border_width = 1,
 	default_color = '#ffffff',
 	default_bar_height = 5 ,
 	default_bar_width = 195,
 	double_buffer = true,
-  draw_outline = false,
+  	draw_outline = false,
 	draw_graph_borders = true,
 	draw_borders = false,
 	draw_shades = false,
@@ -41,12 +40,12 @@ conky.config = {{
 	total_run_times = 0,
 	update_interval = 10,
 	use_xft = true,
+    	font = 'Hack Nerd Font Mono:bold:size=8',
 	xftalpha = 1.0,
---xftfont Freesans:pixelsize=16
 	short_units = true,
-	xinerama_head = 2,
+	xinerama_head = 1,
 	lua_draw_hook_post = 'main_bars',
--- Set all colors to be used, switched over to this to make admin MUCH easier(DONE)
+	-- Set all colors to be used, switched over to this to make admin MUCH easier
 	own_window_colour = '#000000',
 	color1 = '{color1}',
 	color2 = '{color2}',
