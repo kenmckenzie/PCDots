@@ -1,0 +1,28 @@
+#!/bin/sh
+# Small script to switch the vpn on or off for use with my wireguard vpn,
+# can either be run standalone to toggle on/off or with on or off as a argument
+# TODO, add the connection as a variable to make changes easier
+
+
+# Query status of connection, Replace with your own vpn connection
+netstatus=$(nmcli -f GENERAL.STATE con show Linode\ Wireguard | awk {'print $2'})
+echo $netstatus
+
+# Toggles between on and off depending on the result of netstatus
+if [[ "$1" == '' ]]; then
+	if [ "$netstatus" == "activated" ]; then
+		nmcli connection down Linode\ Wireguard	 &&  notify-send "Vpn Disconnected"
+	elif [ "$netstatus" == "" ]; then
+		nmcli connection up Linode\ Wireguard	&& notify-send "Vpn Connected"
+
+
+	fi		
+fi
+
+# If argument is supplied, will do as instructed
+if [[ "$1" == 'down' ]]; then
+	nmcli connection down Linode\ Wireguard
+elif [[ "$1" == 'up' ]]; then
+	nmcli connection up Linode\ Wireguard
+
+fi
