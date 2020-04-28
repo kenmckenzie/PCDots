@@ -1,19 +1,33 @@
 #!/bin/sh
 # Shows an icon with internet status, also connects to vpn 
 
+# i3blocks capable clickable section
 case $BLOCK_BUTTON in
 	1) $TERMINAL -e nmtui ;;
-	2) nmcli connection up Linode\ Wireguard >/dev/null 2>/dev/null && notify-send "VPN Connected" ;;
-	3) pgrep -x dunst >/dev/null && notify-send "🌐 Internet module" "\- Click to connect
-📡睊: no wifi connection
-📶: wifi connection with quality
-❎: no ethernet
-🌐ﯱ: ethernet working
-" ;;
+	2) vpn >/dev/null 2>/dev/null && pkill -RTMIN+2 dwmblocks ;;
+	3) pgrep -x dunst >/dev/null && notify-send " Internet module" "\- Click to connect
+睊: no wifi connection
+: wifi connection with quality
+: no ethernet
+ﯱ: ethernet working
+Middle click to connect to vpn
+";;
+
 esac
 
-[ "$(cat /sys/class/net/w*/operstate)" = 'down' ] && wifiicon="" ||
+# Wifi Settings left in for my laptop, code not added 
+
+[ "$(cat /sys/class/net/e*/operstate)" = 'down' ] && wifiicon="" ||
 	wifiicon=$(grep "^\s*w" /proc/net/wireless | awk '{ print "", int($3 * 100 / 70) "%" }')
 
-printf "%s %s\n" "$wifiicon" "$(sed "s/down/ /;s/up/ﯱ /" /sys/class/net/e*/operstate)"
+# Query vpn status 
+vpnstatus=$(nmcli -f GENERAL.STATE con show Linode\ Wireguard | awk {'print $2'})
+
+if [ "$vpnstatus" == 'activated' ]; then
+	printf "%s\n" " 旅 "
+elif [ "$(cat /sys/class/net/e*/operstate)" = 'up' ]; then
+	printf "%s\n" " ﯱ "
+else 
+	printf "%s\n" "  "
+fi
 
