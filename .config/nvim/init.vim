@@ -5,7 +5,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'vimwiki/vimwiki'
 Plug 'dylanaraps/wal.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
+Plug 'vim-airline/vim-airline'
 
 
 

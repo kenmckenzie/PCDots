@@ -71,6 +71,10 @@ dwm.selbordercolor:{color15}
 dwm.selbgcolor:{color2}
 dwm.selfgcolor:{color15}
 
-
+!dmenu.font: 
+dmenu.background:{color0}
+dmenu.foreground:{color15}
+dmenu.selbackground:{color2}
+dmenu.selforeground:{color15}
 ! Set depth to make transparency work.
 URxvt*depth: 32

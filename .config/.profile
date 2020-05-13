@@ -13,7 +13,7 @@ export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export XDG_CACHE_HOME="$HOME"/.cache
 export XDG_CONFIG_HOME="$HOME"/.config
 export XDG_DATA_HOME="$HOME"/.local/share
-export ATOM_HOME="$XDG_DATA_HOME"/atom
+export ATOM_HOME="$XDG_CONFIG_HOME"/atom
 
 alias wget="wget --hsts-file=$XDG_CACHE_HOME/wget-hsts"
 
@@ -45,4 +45,13 @@ fi
 xrdb -merge "$HOME/.cache/wal/colors.Xresources"
 
 # Startup after path is set
-picom -b
+picom -b &
+mono & # Only needed for my system, do not use or it will bork your audio
+lxsession &
+dwmblocks &
+nm-applet &
+setbg & 
+pa-applet &
+startconky &
+xsettingsd &
+transmission-daemon
