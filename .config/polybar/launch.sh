@@ -8,6 +8,6 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 # Launch bar1 and bar2 , Will also start a bar for vnc when active 
 polybar bar1 &
-polybar bar2 &
+#polybar bar2 &
 #polybar vncbar &
 echo "Bars launched..."

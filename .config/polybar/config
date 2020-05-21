@@ -31,12 +31,12 @@ background-alt = #444
 [bar/bar1]
 monitor = ${env:MONITOR:HDMI-A-0}
 monitor-fallback = ${env:MONITOR:LVDS1}
-
+;override-redirect = true
 width = 100%
-height = 28
+height = 26
 ;offset-x = 10%
 ;offset-y = 1%
-radius = 6.0
+;radius = 6.0
 fixed-center = true
 
 background = ${colors.background}
@@ -45,7 +45,7 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = ${colors.foreground}
 
-border-size = 4
+;border-size = 1
 border-color = #00000000
 
 ;padding-left = 0
@@ -59,22 +59,22 @@ module-margin-right = 0
 ;font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 ;font-2 = siji:pixelsize=10;1
 
-font-0 = Hack Nerd Font :pixelsize=12;3
-font-1 = Hack Nerd Font :pixelsize=12;3
-font-2 = Hack Nerd Font :pixelsize=12;3
+font-0 = Hack Nerd Font :pixelsize=11;1
+font-1 = Hack Nerd Font :pixelsize=11;1
+font-2 = Hack Nerd Font :pixelsize=11;1
 
 
-modules-left = rofimenu i3 xwindow
+modules-left = rofimenu i3 bspwm xwindow
 modules-center =  
 # removing to test better method player-playerctl
 modules-right = pulseaudio date powermenu
-;tray-position = right
-;tray-padding = 2
+tray-position = right
+tray-padding = 2
 ;format-margin = 2
-;tray-transparent = true
+tray-transparent = true
 ;tray-background = #3363ff
 
-;wm-restack = bspwm
+wm-restack = bspwm
 ;wm-restack = i3
 
 ;override-redirect = true
@@ -103,8 +103,8 @@ foreground = ${colors.foreground}
 ;line-size = 3
 ;line-color = #f00
 
-border-size = 4
-border-color = #00000000
+;border-size = 4
+;border-color = #00000000
 
 ;padding-left = 0
 ;padding-right = 2
@@ -122,8 +122,8 @@ font-1 = Hack Nerd Font :pixelsize=12;3
 font-2 = Hack Nerd Font :pixelsize=12;3
 
 
-modules-left = rofimenu i3 xwindow
-modules-center =   
+modules-left = rofimenu i3 bspwm xwindow
+modules-center = spotify 
 # See above comment player-playerctl
 modules-right = pulseaudio date powermenu
 tray-position = right
@@ -131,7 +131,7 @@ tray-padding = 4
 ;tray-transparent = true
 ;tray-background = #3363ff
 
-;wm-restack = bspwm
+wm-restack = bspwm
 ;wm-restack = i3
 
 ;override-redirect = true
@@ -191,7 +191,7 @@ modules-right = pulseaudio date powermenu
 ;tray-transparent = true
 ;tray-background = #3363ff
 
-;wm-restack = bspwm
+wm-restack = bspwm
 ;wm-restack = i3
 
 ;override-redirect = true
@@ -250,13 +250,15 @@ label-focused-underline= ${colors.primary}
 label-focused-padding = 2
 
 label-occupied = %index%
+;label-occupied-underlne = ${colors.primary}
 label-occupied-padding = 2
 
 label-urgent = %index%!
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
 
-label-empty = %index%
+label-empty = " "
+;label-empty = %index%
 label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 2
 
@@ -595,7 +597,7 @@ screenchange-reload = true
 ;compositing-border = over
 
 [global/wm]
-margin-top = 5
-margin-bottom = 5
+margin-top = 2
+margin-bottom = 2
 
 ; vim:ft=dosini
