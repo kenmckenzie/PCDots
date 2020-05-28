@@ -24,8 +24,13 @@ URxvt.url-launcher: /usr/bin/xdg-open
 URxvt.matcher.button: 1
 
 ! positioning and ricing for rofi on laptop (Set for 1080p adjust for other resolutions)
-rofi.yoffset :  -322
+rofi.yoffset :  -355
 rofi.width : 25
 rofi.show-icons : true
-rofi.font : Hack Nerd Font 12
+rofi.font : Hack Nerd Font 10
 
+*.font: monospace:size=10
+! default dpi for a 1080p monitor, change it if needed
+Xft.dpi: 96 
+
+Xcursor.theme: breeze 
