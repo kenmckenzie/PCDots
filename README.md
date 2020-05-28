@@ -5,7 +5,7 @@ My personal dotfiles for various tiling window managers plus assorted apps. Used
 
 I use user templates for Pywal extremely heavily. in other words. many of the config files are actually in the ~/.config/wal/Templates folder, they need to be symlinked to their usual locations for them to work. 
 
-A good portion of the window manager's and apps I use have been edited or patched in order to make use of xresources, so if not planning to use pywal please set your colors there to aviod alot of manual configuration
+A good portion of the window manager's and apps I use have been edited or patched in order to make use of xresources, so if not planning to use pywal please set your colors there to avoid alot of manual configuration
 
 Unfortunately there is alot of manual work required to get the config as displayed, am planning to write a script to do the heavy lifting in future.
 
