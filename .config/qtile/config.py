@@ -24,13 +24,40 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from libqtile.config import Key, Screen, Group, Drag, Click
-from libqtile.lazy import lazy
-from libqtile import layout, bar, widget
-from xrec import colors, layout_theme # see xrec.py in qtile folder
-from typing import List  # noqa: F401
+# TODO, finish switching away from wal template for setting colors, 
+# Longterm, split things up to different files for readibility
 
+
+from libqtile.config import Key, Screen, Group, Drag, Click , ScratchPad, DropDown
+from libqtile.lazy import lazy
+from libqtile import layout, bar, widget, hook, extension
+from xrec import colors, layout_theme # see xrec.py in qtile folder
+import json
+from typing import List  # noqa: F401
+from os import environ , getenv, path
+# below import requires Xparser, install with pip 
+import xrp
+
+# Get terminal from environment variables
+terminal = environ.get("TERMINAL")
 mod = "mod4"
+
+
+# parse xresources in file, much better implementation 
+xresources = path.realpath(getenv('HOME') + '/.config/.Xresources')
+result = xrp.parse_file(xresources, 'utf-8')
+
+color_data = json.loads(open(getenv('HOME')+'/.cache/wal/colors.json').read())
+# BLACK = color_data['colors']['color0']
+# BLACK = "#15181a"
+BLACK = "#1A1C1D"
+RED = color_data['colors']['color1']
+GREEN = color_data['colors']['color2']
+YELLOW = color_data['colors']['color3']
+BLUE = color_data['colors']['color4']
+MAGENTA = color_data['colors']['color5']
+CYAN = color_data['colors']['color6']
+WHITE = color_data['colors']['color7']
 
 keys = [
     # Switch between windows in current stack pane
@@ -91,18 +118,32 @@ keys = [
     # multiple stack panes
     Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
     Key([mod], "Return", lazy.spawn("st")),
-    Key([mod], "d", lazy.spawn("dmenu_run")),
+    Key([mod], "d",  lazy.run_extension(extension.DmenuRun())),
     Key([mod], "F1", lazy.spawn("atom")),
     Key([mod], "F2", lazy.spawn("brave")),
     Key([mod], "F3", lazy.spawn("thunar")),
     Key([mod], "F4", lazy.spawn("spotify")),
     Key([mod], "z" , lazy.spawn("rofimenu")),
-    Key([mod, "shift"], "d", lazy.spawn("rofi -modi 'window,run,ssh,drun' -show run")),
-    Key([], "XF86AudioNext", lazy.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next")),
-    Key([], "XF86AudioPrev", lazy.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")),
-    Key([], "XF86AudioPlay", lazy.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")),
-    Key([], "XF86AudioStop", lazy.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop")),
-
+    Key([mod, "shift"], "d", 
+            lazy.spawn("rofi -modi 'window,run,ssh,drun' -show run")),
+    Key([], "XF86AudioNext", 
+            lazy.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next")),
+    Key([], "XF86AudioPrev", 
+            lazy.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")),
+    Key([], "XF86AudioPlay", 
+            lazy.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")),
+    Key([], "XF86AudioStop", 
+            lazy.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop")),
+    Key([mod], '0', lazy.run_extension(extension.CommandSet(
+        commands={
+            'lock': 'slock',
+            'suspend': 'systemctl suspend && slock',
+            'restart': 'reboot',
+            'shutdown': 'systemctl poweroff',
+            'logout': 'qtile-cmd -o cmd -f shutdown',
+            'reload': 'qtile-cmd -o cmd -f restart',
+            },
+        ))),
     # general volume
     Key([], "XF86AudioRaiseVolume", lazy.spawn("volumenotify +5")),
     Key([], "XF86AudioLowerVolume", lazy.spawn("volumenotify -5")),
@@ -111,56 +152,84 @@ keys = [
 #    Key(["mod4"], "XF86AudioRaiseVolume", lazy.spawn("mpc volume +5")),
 #    Key(["mod4"], "XF86AudioLowerVolume", lazy.spawn("mpc volume -5")),
 
+    Key([mod], "Tab", lazy.run_extension(extension.WindowList(
+        item_format="{group}: {window}",
+        foreground=BLUE,
+        selected_background=BLUE)),
+        desc='window list'),
+
     # Toggle between different layouts as defined below
-    Key([mod], "Tab", lazy.next_layout()),
+    Key([mod,'shift'], "Tab", lazy.next_layout()),
     Key([mod], "q", lazy.window.kill()),
 
     Key([mod, "control"], "r", lazy.restart()),
     Key([mod, "control"], "q", lazy.shutdown()),
     Key([mod], "r", lazy.spawncmd()),
 ]
+     
+group_names = [ "1 ", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ", "8 λ", "9 " ]
+groups = [Group(name, layout='monadtall') for name in group_names]
+for i, name in enumerate(group_names):
+    indx = str(i + 1)
+    keys += [
+        Key([mod], indx, lazy.group[name].toscreen()),
+        Key([mod, 'shift'], indx, lazy.window.togroup(name))]
 
-groups = [Group(i) for i in "12345678"]
+#groups = [Group(i) for i in "12345678"]
+#
+#for i in groups:
+#    keys.extend([
+#        # mod1 + letter of group = switch to group
+#        Key([mod], i.name, lazy.group[i.name].toscreen()),
+#
+#        # mod1 + shift + letter of group = switch to & move focused window to group
+#        Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True)),
+#        # Or, use below if you prefer not to switch to that group.
+#        # # mod1 + shift + letter of group = move focused window to group
+#        # Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
+#    ])
+#
+# append a scratchpad group
+groups.append(
+    ScratchPad("scratchpad", [
+        # define a drop down terminal.
+        # it is placed in the upper third of screen by default.
+        DropDown("term", "st", opacity=0.8),
+    ]),
+)
 
-for i in groups:
-    keys.extend([
-        # mod1 + letter of group = switch to group
-        Key([mod], i.name, lazy.group[i.name].toscreen()),
-
-        # mod1 + shift + letter of group = switch to & move focused window to group
-        Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True)),
-        # Or, use below if you prefer not to switch to that group.
-        # # mod1 + shift + letter of group = move focused window to group
-        # Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
-    ])
+# define keys to toggle the dropdown for st
+keys.extend([
+    Key([mod], 'grave', lazy.group['scratchpad'].dropdown_toggle('term')),
+])
 
 # Standard Layout settings are moved to xrec.py to allow for theming
 
 # apply them below
 layouts = [
-    #layout.Max(),
     #layout.Stack(num_stacks=2),
     #layout.Bsp(),
     #layout.Columns(),
     #layout.Matrix(),
     layout.MonadTall(**layout_theme),
     layout.Tile(**layout_theme),
+    layout.Max(),
     layout.MonadWide(**layout_theme),
     layout.RatioTile(**layout_theme),
-    layout.TreeTab(
-        font = "monospace",
-        fontsize = 10,
-        sections = ["FIRST", "SECOND"],
-        section_fontsize = 11,
-        bg_color = "141414",
-        active_bg = "90C435",
-        active_fg = "000000",
-        inactive_bg = "384323",
-        inactive_fg = "a0a0a0",
-        padding_y = 5,
-        section_top = 10,
-        panel_width = 320
-        ),
+#    layout.TreeTab(
+#        font = "monospace",
+#        fontsize = 10,
+#        sections = ["FIRST", "SECOND"],
+#        section_fontsize = 11,
+#        bg_color = "141414",
+#        active_bg = "90C435",
+#        active_fg = "000000",
+#        inactive_bg = "384323",
+#        inactive_fg = "a0a0a0",
+#        padding_y = 5,
+#        section_top = 10,
+#        panel_width = 320
+#        ),
     layout.VerticalTile(**layout_theme),
     layout.Zoomy(**layout_theme),
 ]
@@ -171,26 +240,39 @@ widget_defaults = dict(
     padding=0,
     background=colors[0],
 )
-extension_defaults = widget_defaults.copy()
+#extension_defaults = widget_defaults.copy()
+extension_defaults = dict(
+    dmenu_prompt=">",
+    dmenu_font='monospace',
+    background=BLACK,
+    foreground=GREEN,
+    selected_background=GREEN,
+    selected_foreground=BLACK,
+    dmenu_height=24,
+    )
 
 screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.LaunchBar(progs=[('rofi','rofimenu','Rofi launcher')],default_icon='/home/ulverza/Pictures/icons/arch.png', background=colors[2]),
+                widget.LaunchBar(progs=[('rofi','rofimenu','Rofi launcher')],
+                    default_icon='/home/ulverza/Pictures/icons/arch.png',
+                    background=colors[0]),
                 widget.GroupBox(
-                        padding = 10,
-                        active = colors[6],
-                        inactive = colors[5],
+                        padding = 5,
+                        active = colors[7],
+                        inactive = colors[8],
                         rounded = False,
-                        highlight_color = colors[1],
+                        highlight_color = colors[3],
                         highlight_method = "block",
-                        this_current_screen_border = colors[3],
+                        this_current_screen_border = colors[2],
                         #this_screen_border = colors [4],
                         other_current_screen_border = colors[0],
                         other_screen_border = colors[0],
                         foreground = colors[2],
-                        background = colors[0]
+                        background = colors[0],
+                        disable_drag = True,
+                        #hide_unused = True 
                         ),
 
                 widget.Prompt(),
@@ -198,7 +280,13 @@ screens = [
                         padding=3,
                         background=colors[2]
                         ),
-                widget.Mpris2(background=colors[2],scroll_chars=50,objname='org.mpris.MediaPlayer2.spotify'),
+#                 widget.Mpris(objname='org.mpris.MediaPlayer.spotify'),
+                widget.Mpris2(display_metadata=['xesam:title', 'xesam:artist'],
+                        stop_pause_text=" ",	
+                        scroll_wait_intervals=30 ,	
+                        background=colors[2],
+                        scroll_chars=50,
+                        objname='org.mpris.MediaPlayer2.spotify'),
                 #widget.TextBox("default config", name="default"),
                 #widget.CheckUpdates(),
                 widget.CurrentLayoutIcon(),
@@ -217,7 +305,7 @@ screens = [
                         background=colors[0]
                         ),
             ],
-            24,opacity=0.8
+            24,opacity=0.7
         ),
     ),
 ]
@@ -230,6 +318,23 @@ mouse = [
          start=lazy.window.get_size()),
     Click([mod], "Button2", lazy.window.bring_to_front())
 ]
+
+# Steam floating on all windows exept main
+@hook.subscribe.client_new
+def float_steam(window):
+    wm_class = window.window.get_wm_class()
+    w_name = window.window.get_name()
+    if (
+        wm_class == ("Steam", "Steam")
+        and (
+            w_name != "Steam"
+            # w_name == "Friends List"
+            # or w_name == "Screenshot Uploader"
+            # or w_name.startswith("Steam - News")
+            or "PMaxSize" in window.window.get_wm_normal_hints().get("flags", ())
+        )
+    ):
+        window.floating = True
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
@@ -247,13 +352,14 @@ floating_layout = layout.Floating(float_rules=[
     {'wmclass': 'notification'},
     {'wmclass': 'splash'},
     {'wmclass': 'toolbar'},
+    {'wmclass': 'Galculator'},
     {'wmclass': 'confirmreset'},  # gitk
     {'wmclass': 'makebranch'},  # gitk
     {'wmclass': 'maketag'},  # gitk
     {'wname': 'branchdialog'},  # gitk
     {'wname': 'pinentry'},  # GPG key password entry
     {'wmclass': 'ssh-askpass'},  # ssh-askpass
-])
+],no_reposistion_match=None,**layout_theme)
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 
