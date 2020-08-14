@@ -31,13 +31,13 @@
 from libqtile.config import Key, Screen, Group, Drag, Click , ScratchPad, DropDown
 from libqtile.lazy import lazy
 from libqtile import layout, bar, widget, hook, extension
-from xrec import colors, layout_theme # see xrec.py in qtile folder
+from xrec import colors # , layout_theme # see xrec.py in qtile folder
 import json
 from typing import List  # noqa: F401
 from os import environ , getenv, path
 # below import requires Xparser, install with pip 
 import xrp
-
+import psutil
 # Get terminal from environment variables
 terminal = environ.get("TERMINAL")
 mod = "mod4"
@@ -46,11 +46,11 @@ mod = "mod4"
 # parse xresources in file, much better implementation 
 xresources = path.realpath(getenv('HOME') + '/.config/.Xresources')
 result = xrp.parse_file(xresources, 'utf-8')
-
+# Set to use color[0], change if true black is wanted 
 color_data = json.loads(open(getenv('HOME')+'/.cache/wal/colors.json').read())
-# BLACK = color_data['colors']['color0']
+BLACK = color_data['colors']['color0']
 # BLACK = "#15181a"
-BLACK = "#1A1C1D"
+# BLACK = "#1A1C1D"
 RED = color_data['colors']['color1']
 GREEN = color_data['colors']['color2']
 YELLOW = color_data['colors']['color3']
@@ -117,13 +117,17 @@ keys = [
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
     Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
+    # My usual program startup shortcuts
     Key([mod], "Return", lazy.spawn("st")),
     Key([mod], "d",  lazy.run_extension(extension.DmenuRun())),
     Key([mod], "F1", lazy.spawn("atom")),
     Key([mod], "F2", lazy.spawn("brave")),
     Key([mod], "F3", lazy.spawn("thunar")),
     Key([mod], "F4", lazy.spawn("spotify")),
-    Key([mod], "z" , lazy.spawn("rofimenu")),
+   # Key([mod], "z" , lazy.spawn("rofimenu")),
+    Key([mod], "z" , lazy.run_extension(extension.J4DmenuDesktop())),
+    # Toggles compositor
+    Key([mod], "t" , lazy.spawn("comp")),
     Key([mod, "shift"], "d", 
             lazy.spawn("rofi -modi 'window,run,ssh,drun' -show run")),
     Key([], "XF86AudioNext", 
@@ -175,20 +179,6 @@ for i, name in enumerate(group_names):
         Key([mod], indx, lazy.group[name].toscreen()),
         Key([mod, 'shift'], indx, lazy.window.togroup(name))]
 
-#groups = [Group(i) for i in "12345678"]
-#
-#for i in groups:
-#    keys.extend([
-#        # mod1 + letter of group = switch to group
-#        Key([mod], i.name, lazy.group[i.name].toscreen()),
-#
-#        # mod1 + shift + letter of group = switch to & move focused window to group
-#        Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True)),
-#        # Or, use below if you prefer not to switch to that group.
-#        # # mod1 + shift + letter of group = move focused window to group
-#        # Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
-#    ])
-#
 # append a scratchpad group
 groups.append(
     ScratchPad("scratchpad", [
@@ -204,6 +194,20 @@ keys.extend([
 ])
 
 # Standard Layout settings are moved to xrec.py to allow for theming
+
+layout_theme = {
+    "border_width": 2,
+    "margin": 5,
+    "border_focus":GREEN,
+    "border_normal":BLACK 
+}
+
+floating_theme = {
+    "border_width": 2,
+    "margin": 5,
+    "border_focus":YELLOW,
+    "border_normal":BLUE 
+}
 
 # apply them below
 layouts = [
@@ -238,7 +242,7 @@ widget_defaults = dict(
     font='monospace',
     fontsize=14,
     padding=0,
-    background=colors[0],
+    background=BLACK,
 )
 #extension_defaults = widget_defaults.copy()
 extension_defaults = dict(
@@ -249,42 +253,54 @@ extension_defaults = dict(
     selected_background=GREEN,
     selected_foreground=BLACK,
     dmenu_height=24,
+    dmenu_ignorecase=True
     )
 
 screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.LaunchBar(progs=[('rofi','rofimenu','Rofi launcher')],
+                widget.LaunchBar(progs=[('rofi','jgmenu_run','Rofi Launcher')],
                     default_icon='/home/ulverza/Pictures/icons/arch.png',
-                    background=colors[0]),
+                    background=BLACK),
                 widget.GroupBox(
                         padding = 5,
-                        active = colors[7],
-                        inactive = colors[8],
+                        active = WHITE,
+                        inactive = CYAN,
                         rounded = False,
-                        highlight_color = colors[3],
+                        highlight_color = YELLOW,
                         highlight_method = "block",
-                        this_current_screen_border = colors[2],
+                        this_current_screen_border = GREEN,
                         #this_screen_border = colors [4],
-                        other_current_screen_border = colors[0],
-                        other_screen_border = colors[0],
-                        foreground = colors[2],
-                        background = colors[0],
+                        other_current_screen_border = BLACK,
+                        other_screen_border = BLACK,
+                        foreground = GREEN,
+                        background = BLACK,
                         disable_drag = True,
                         #hide_unused = True 
                         ),
 
                 widget.Prompt(),
-                widget.WindowName(
-                        padding=3,
-                        background=colors[2]
-                        ),
+#                widget.WindowName(
+#                        padding=3,
+#                        background=colors[2]
+#                        ),
 #                 widget.Mpris(objname='org.mpris.MediaPlayer.spotify'),
+                widget.TaskList(
+                    padding=4,
+                    highlight_method='block',
+                    border=GREEN,
+                    unfocused_border=BLACK,
+                    background=GREEN,
+                    rounded=False, 
+                    margin=0,
+                    icon_size=15,
+                    title_width_method='uniform'
+                    ),
                 widget.Mpris2(display_metadata=['xesam:title', 'xesam:artist'],
                         stop_pause_text=" ",	
                         scroll_wait_intervals=30 ,	
-                        background=colors[2],
+                        background=BLACK,
                         scroll_chars=50,
                         objname='org.mpris.MediaPlayer2.spotify'),
                 #widget.TextBox("default config", name="default"),
@@ -292,17 +308,19 @@ screens = [
                 widget.CurrentLayoutIcon(),
                 widget.NetGraph(
                         padding=5,
-                        border_color=colors[0],
-                        fill_color=colors[2],
-                        graph_color=colors[2]
+                        mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn(terminal + ' -e nmtui')},
+                        border_color=BLACK,
+                        fill_color=GREEN,
+                        graph_color=GREEN
                         ),
                 widget.Clock(padding=5,
+                        mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn(terminal + ' -e calcurse')},
                         format='%Y-%m-%d %a %I:%M %p'
                         ),
                 widget.Systray(padding=5),
                 widget.QuickExit(padding=5,
                         default_text="[  ]",
-                        background=colors[0]
+                        background=BLACK
                         ),
             ],
             24,opacity=0.7
@@ -317,6 +335,8 @@ mouse = [
     Drag([mod], "Button3", lazy.window.set_size_floating(),
          start=lazy.window.get_size()),
     Click([mod], "Button2", lazy.window.bring_to_front())
+    # Really bad implemenation, replaced with xclickroot, find on github
+    #Click([], "Button3", lazy.spawn("jgmenu_run"))
 ]
 
 # Steam floating on all windows exept main
@@ -335,6 +355,26 @@ def float_steam(window):
         )
     ):
         window.floating = True
+        
+@hook.subscribe.client_new
+def _swallow(window):
+    pid = window.window.get_net_wm_pid()
+    ppid = psutil.Process(pid).ppid()
+    cpids = {c.window.get_net_wm_pid(): wid for wid, c in window.qtile.windows_map.items()}
+    for i in range(5):
+        if not ppid:
+            return
+        if ppid in cpids:
+            parent = window.qtile.windows_map.get(cpids[ppid])
+            parent.minimized = True
+            window.parent = parent
+            return
+        ppid = psutil.Process(ppid).ppid()
+
+@hook.subscribe.client_killed
+def _unswallow(window):
+    if hasattr(window, 'parent'):
+        window.parent.minimized = False
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
