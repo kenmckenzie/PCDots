@@ -7,7 +7,7 @@ I use user templates for Pywal extremely heavily. in other words. many of the co
 
 A good portion of the window manager's and apps I use have been edited or patched in order to make use of xresources, so if not planning to use pywal please set your colors there to avoid alot of manual configuration
 
-Unfortunately there is alot of manual work required to get the config as displayed, am planning to write a script to do the heavy lifting in future.
+I am currently forking LARBS (Credit to Luke Smith) in order to automate installation 
 
 # Recomended Apps
 - dwm, qtile, bspwm or i3wm gapps (My current favorite is qtile)
