@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Script that runs a xephyr instance to test that qtile isnt broken, slightly modified 
+# version of the script in the qtile repo 
+
+# The HERE var is not needed as arch installs the binary in /usr NOT in /home
+#HERE=$(dirname $(readlink -f $0))
+SCREEN_SIZE=${SCREEN_SIZE:-800x600}
+XDISPLAY=${XDISPLAY:-:1}
+LOG_LEVEL=${LOG_LEVEL:-INFO}
+APP=${APP:-xterm}
+if [[ -z $PYTHON ]]; then
+    PYTHON=python3
+fi
+
+Xephyr +extension RANDR -screen ${SCREEN_SIZE} ${XDISPLAY} -ac &
+XEPHYR_PID=$!
+(
+  sleep 1
+  env DISPLAY=${XDISPLAY} ${PYTHON} /usr/bin/qtile -l ${LOG_LEVEL} $@ &
+  QTILE_PID=$!
+  env DISPLAY=${XDISPLAY} ${APP} &
+  wait $QTILE_PID
+  kill $XEPHYR_PID
+)
