@@ -9,8 +9,12 @@
 # Location of link to wallpaper link.
 bgloc="${XDG_CACHE_HOME:-$HOME/.cache/}/bg"
 
+# Check if symlink already exists, otherwise use the default wallpaper for KARBS
+[ ! -f "$bgloc" ] && ln -sf "$HOME/Pictures/default.jpg" "$bgloc"
+
 [ -f "$1" ] && ln -sf "$(readlink -f "$1")" "$bgloc"  && ln -sf "$(readlink -f "$1")" "$HOME/.config/awesome/themes/xresources/bg.png " && cp  "$(readlink -f "$1")" "/usr/share/pixmaps/wall/bg" && notify-send -i "$bgloc" "Changing wallpaper..."
 
+# Random Wallpaper showing
 [ -d "$1" ] && ln -sf "$(find "$(readlink -f "$1")" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)" "$bgloc" && notify-send -i "$bgloc" "Random Wallpaper chosen."
 
 # If pywal is installed, use it.
@@ -22,7 +26,8 @@ wpg -s "$(readlink -f "$bgloc")" && cp -r $HOME/.local/share/themes/FlatColor/* 
 gtk-update-icon-cache -f -t ~/.local/share/icons/flattrcolor
 # Automaticaly refresh dwmbar using a simulated keypress 
 pidof dwm >/dev/null && xdotool key super+shift+F5
-# Set wallpaper 
-echo 'awesome.restart()' | awesome-client 
+# Set wallpaper for awesome wm
+#echo 'awesome.restart()' | awesome-client 
 xwallpaper --zoom "$bgloc"
+# Restart qtile 
 qtile-cmd -o cmd -f restart >/dev/null 2>&1
