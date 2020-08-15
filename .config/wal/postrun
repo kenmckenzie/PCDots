@@ -2,11 +2,16 @@
 
 source "${HOME}/.cache/wal/colors.sh"
 
-#mkdir -p  "${HOME}/.config/dunst"
-#mkdir -p  "${HOME}/.config/zathura"
-#ln -sf    "${HOME}/.cache/wal/dunstrc"    "${HOME}/.config/dunst/dunstrc"
-#ln -sf    "${HOME}/.cache/wal/zathurarc"    "${HOME}/.config/zathura/zathurarc"
+# Symlink all my wal configs to the required locations
 
+mkdir -p  "${HOME}/.config/dunst"
+#mkdir -p  "${HOME}/.config/zathura"
+mkdir -p "${HOME}/.config/conky"
+ln -sf    "${HOME}/.cache/wal/dunstrc"    "${HOME}/.config/dunst/dunstrc"
+#ln -sf    "${HOME}/.cache/wal/zathurarc"    "${HOME}/.config/zathura/zathurarc"
+ln -sf    "${HOME}/.cache/wal/jgmenurc"    "${HOME}/.config/jgmenu/jgmenurc"
+ln -sf    "${HOME}/.cache/wal/Conky1"    "${HOME}/.config/conky/Conky1"
+ln -sf    "${HOME}/.cache/wal/Conky2"    "${HOME}/.config/conky/Conky2"
 fix_sequences() {
         e=$'\e'
         sequences=$(cat)
@@ -24,5 +29,6 @@ done
 
 fix_sequences <"${HOME}/.cache/wal/sequences"
 
-pkill dunst; dunst &
-
+#xsetroot -name "fsignal:xrdb"
+pkill dunst
+dunst &
