@@ -1,18 +1,29 @@
 ## Template to add xresources colors to qtile, first is for widget's, second for layouts
 ## (Really just borders) 
 
-colors = [["{color1}", "{color1}"], # panel background
-          ["{color2}", "{color2}"], # background for current screen tab
-          ["{color3}", "{color3}"], # font color for group names
-          ["{color4}", "{color4}"], # border line color for current tab
-          ["{color5}", "{color5}"], # border line color for other tab and odd widgets
-          ["{color6}", "{color6}"], # color for the even widgets
-          ["{color7}", "{color7}"]] # window name
-
+colors = [["{color0}", "{color0}"], 
+          ["{color1}", "{color1}"],
+          ["{color2}", "{color2}"],
+          ["{color3}", "{color3}"],
+          ["{color4}", "{color4}"],
+          ["{color5}", "{color5}"],
+          ["{color6}", "{color6}"],
+          ["{color7}", "{color7}"], 
+          ["{color8}", "{color8}"], 
+          ["{color9}", "{color9}"]] 
+        
 
 layout_theme = {{
     "border_width": 2,
     "margin": 5,
-    "border_focus": "{color7}",
-    "border_normal": "{color6}" 
+    "border_focus": "{color2}",
+    "border_normal": "{color7}" 
 }}
+
+floating_theme = {{
+    "border_width": 2,
+    "margin": 5,
+    "border_focus": "{color4}",
+    "border_normal": "{color3}" 
+}}
+

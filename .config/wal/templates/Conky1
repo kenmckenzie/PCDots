@@ -68,32 +68,41 @@ ${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}DISTRO: ${{alignr}}Arch Lin
 ${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}KERNEL: ${{alignr}}${{kernel}}
 ${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}HOST: ${{alignr}}${{nodename}}
 ${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}UPTIME: ${{alignr}}${{uptime}}
-${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}PROCESSOR: ${{alignr}}${{execi 100 lscpu | grep -i "model name" | cut -c 52-80}}
+${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}PROCESSOR: ${{alignr}}${{execi 100 lscpu | grep -i "model name" | cut -c 38-50}}
 
 #CPU LOAD: ${{alignr 10}}${{loadavg}}
 #MB TEMP: ${{alignr 10}}${{execi 15 sensors | tail -n 15 | grep -i "temp1" | cut -c 15-22}}
 #UPDATES:  ${{alignr 8}}${{color1}}${{color1}}${{execpi 3600 checkupdates | wc -l}}
 #${{color2}}${{font Hack Mono:pixelsize=12}}p ${{color1}}${{font Hack Nerd Font Mono:pixelsize=16}}DESKTOP ${{color3}}${{hr 2}}${{color2}}${{font Hack Nerd Font Mono Mono:pixelsize=16}}
-#DESKTOP: ${{desktop}}  
+#DESKTOP: ${{desktop}}
 ${{color1}}${{font Hack Nerd Font Mono:pixelsize=16}}NETWORK ${{color3}}${{hr 2}}${{color2}}${{font Hack Nerd Font Mono Mono:pixelsize=16}}
-${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}UP: ${{alignr}}${{upspeed enp0s31f6}}
-${{upspeedgraph enp0s31f6 15,230 color1 color1}}
-${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}DOWN: ${{alignr}}${{downspeed enp0s31f6}}
-${{downspeedgraph enp0s31f6 15,230- color1 color1}}
-${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}TOTAL UP: ${{alignr}}${{totalup enp0s31f6}}
-${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}TOTAL DOWN: ${{alignr}}${{totaldown enp0s31f6}}
+${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}UP: ${{alignr}}${{upspeed enp37s0}}
+${{upspeedgraph enp37s0 15,230 color1 color1}}
+${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}DOWN: ${{alignr}}${{downspeed enp37s0}}
+${{downspeedgraph enp37s0 15,230- color1 color1}}
+${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}TOTAL UP: ${{alignr}}${{totalup enp37s0}}
+${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}TOTAL DOWN: ${{alignr}}${{totaldown enp37s0}}
 
 ${{color1}}${{font Hack Nerd Font Mono:pixelsize=16}}CPU ${{color3}}${{hr 2}}${{color2}}
 ${{font Hack Nerd Font Mono Mono:pixelsize=16}}${{cpu cpu0}}% ${{goto 35}}  ${{color4}}${{cpubar 5,190 cpu0}}${{color2}}
-${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}CORE 1: ${{alignr}}${{freq cpu1}}MHz
-${{font Hack Nerd Font Mono:pixelsize=16}}${{cpu cpu1}}%${{goto 35}} ${{color4}}${{cpubar 5,190 cpu1}}${{color2}} 
-${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}CORE 2: ${{alignr}}${{freq cpu2}}MHz
-${{font Hack Nerd Font Mono:pixelsize=16}}${{cpu cpu2}}%${{goto 35}} ${{color4}}${{cpubar 5,190 cpu2}}${{color2}}
-${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}CORE 3: ${{alignr}}${{freq cpu3}}MHz
-${{font Hack Nerd Font Mono:pixelsize=16}}${{cpu cpu3}}%${{goto 35}} ${{color4}}${{cpubar 5,190 cpu3}}${{color2}} 
-${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}CORE 4: ${{alignr}}${{freq cpu4}}MHz
-${{font Hack Nerd Font Mono:pixelsize=16}}${{cpu cpu4}}%${{goto 35}} ${{color4}}${{cpubar 5,190 cpu4}}${{color2}} 
-CPU TEMP: ${{alignr}}${{execp sensors | tail -n 15 | grep -i "Core 0" | cut -c 17-20}} °C
+#${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}CORE 1 CORE 5 CORE 9 
+${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}${{alignc}}CORE USAGE
+${{font Hack Nerd Font Mono:pixelsize=16}}${{cpu cpu1}}%${{goto 43}}${{color4}}${{cpubar 5,70 cpu1}}${{color2}}${{goto 115}} ${{cpu cpu2}}%${{goto 163}}${{color4}}${{cpubar 5,70 cpu2}}${{color2}}
+${{font Hack Nerd Font Mono:pixelsize=16}}${{cpu cpu3}}%${{goto 43}}${{color4}}${{cpubar 5,70 cpu3}}${{color2}}${{goto 115}} ${{cpu cpu4}}%${{goto 163}}${{color4}}${{cpubar 5,70 cpu4}}${{color2}}
+${{font Hack Nerd Font Mono:pixelsize=16}}${{cpu cpu5}}%${{goto 43}}${{color4}}${{cpubar 5,70 cpu5}}${{color2}}${{goto 115}} ${{cpu cpu6}}%${{goto 163}}${{color4}}${{cpubar 5,70 cpu6}}${{color2}}
+${{font Hack Nerd Font Mono:pixelsize=16}}${{cpu cpu7}}%${{goto 43}}${{color4}}${{cpubar 5,70 cpu7}}${{color2}}${{goto 115}} ${{cpu cpu8}}%${{goto 163}}${{color4}}${{cpubar 5,70 cpu8}}${{color2}}
+${{font Hack Nerd Font Mono:pixelsize=16}}${{cpu cpu9}}%${{goto 43}}${{color4}}${{cpubar 5,70 cpu9}}${{color2}}${{goto 115}} ${{cpu cpu10}}%${{goto 163}}${{color4}}${{cpubar 5,70 cpu10}}${{color2}}
+${{font Hack Nerd Font Mono:pixelsize=16}}${{cpu cpu11}}%${{goto 43}}${{color4}}${{cpubar 5,70 cpu11}}${{color2}}${{goto 115}} ${{cpu cpu12}}%${{goto 163}}${{color4}}${{cpubar 5,70 cpu12}}${{color2}}
+#${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}CORE 2 CORE 6 CORE 10
+#${{font Hack Nerd Font Mono:pixelsize=16}}${{cpu cpu2}}%${{goto 70}}${{cpubar 5,50 cpu2}}${{goto 70}} ${{cpu cpu6}}%${{cpubar 5,50 cpu6}}${{goto 160}}${{color2}}
+#${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}CORE 3 CORE 7 CORE 11
+#${{font Hack Nerd Font Mono:pixelsize=16}}${{cpu cpu3}}%${{goto 70}}${{cpubar 5,50 cpu3}}${{goto 70}} ${{cpu cpu7}}%${{cpubar 5,50 cpu7}}${{goto 160}}${{color2}}
+#${{color2}}${{font Hack Nerd Font Mono:pixelsize=16}}CORE 4 CORE 8 CORE 12  
+#${{font Hack Nerd Font Mono:pixelsize=16}}${{cpu cpu4}}%${{goto 70}}${{cpubar 5,50 cpu4}}${{goto 70}} ${{cpu cpu8}}%${{cpubar 5,50 cpu8}}${{goto 160}}${{color2}}
+#${{cpu cpu9}}%${{goto 70}}${{cpubar 5,45 cpu9}}${{cpu cpu10}}%${{cpubar 5,45 cpu10}}
+#${{cpu cpu11}}%${{goto 70}}${{cpubar 5,45 cpu11}}${{cpu cpu12}}%${{cpubar 5,45 cpu12}}
+
+CPU TEMP: ${{alignr}}${{execp sensors | tail -n 15 | grep -i "Tctl" | cut -c 16-20}}°C
 #FAN SPEED: ${{alignr}}${{execi 15 sensors | grep -i "fan1" | cut -c 14-21}}
 
 #${{color1}}${{font Hack Nerd Font Mono:pixelsize=16}}GPU ${{color3}}${{hr 2}}${{color2}}${{font Hack Nerd Font Mono Mono:pixelsize=16}}
