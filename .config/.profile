@@ -1,5 +1,5 @@
 # Profile file. Runs on login. Environmental variables are set here.
-# I use this to run all programs once dwm starts
+ I use this to run all programs once dwm starts
 # Default Programs
 export EDITOR="nvim"
 export TERMINAL="st"
@@ -45,13 +45,20 @@ fi
 xrdb -merge "$HOME/.cache/wal/colors.Xresources"
 
 # Startup after path is set
-picom -b &
-mono & # Only needed for my system, do not use or it will bork your audio
+picom -b 
+transmission-daemon &
 lxsession &
-dwmblocks &
+#dwmblocks & 
+#indicator-kdeconnect &
+dwm_bar &
 nm-applet &
 setbg & 
+keys &
 pa-applet &
 startconky &
 xsettingsd &
-transmission-daemon
+xfce4-power-manager &
+spotify-tray &
+x11vnc -display :0 -usepw &
+steam -silent & 
+xclickroot -r jgmenu_run &
