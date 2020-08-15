@@ -1,0 +1,25 @@
+#!/bin/sh
+# Script that starts conky by querying xrandr for my monitor inputs. Needs to be modified for other users
+ln -sf ~/.cache/wal/Conky1 ~/.config/conky/Conky1 && ln -sf ~/.cache/wal/Conky2 ~/.config/conky/Conky2
+
+killall conky
+cd $HOME/.config/conky/
+# monit="$(xrandr -q | grep "\bconnected\b" | awk {'print $1'})"
+xrandr -q | grep "\bconnected\b" | awk {'print $1'} | while read -r line;
+do
+	if [ "$line" == "HDMI-A-0" ] ; then
+		conky -c ./Conky1 &
+		
+		notify-send "$line conky started"
+	elif [ "$line" == "DVI-D-0" ] ; then
+		conky -c ./Conky2 &
+		notify-send "$line conky started"
+	elif [ "$line" == "VNC-0" ] ; then
+		conky -c ./Conky2 &
+		notify-send "$line conky started"
+	else 
+		notify-send "non scripted monitors detected, please alter the script for your display's"
+	fi	
+done	
+
+

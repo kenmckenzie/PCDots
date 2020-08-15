@@ -18,7 +18,7 @@ bgloc="${XDG_CACHE_HOME:-$HOME/.cache/}/bg"
 [ -d "$1" ] && ln -sf "$(find "$(readlink -f "$1")" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)" "$bgloc" && notify-send -i "$bgloc" "Random Wallpaper chosen."
 
 # Check if WPGTK icons and gtk theme is installed, if not, install
-[ ! -f "$HOME/.local/share/themes/FlatColor/index.theme" ] && wpg-install.sh -ig
+[ ! -f "$HOME/.local/share/themes/FlatColor/index.theme" ] && wpg-install.sh -ig 
 
 # If pywal is installed, use it.
 wal -s -i "$(readlink -f "$bgloc")" -o "${XDG_CONFIG_HOME:-$HOME/.config}/wal/postrun" >/dev/null 2>&1
@@ -27,10 +27,10 @@ wpg -i "$(readlink -f "$bgloc")" ~/.cache/wal/colors.json
 wpg -s "$(readlink -f "$bgloc")" && cp -r $HOME/.local/share/themes/FlatColor/* /usr/share/themes/FlatColor/
 # Refresh Icon Cache while gui apps open
 gtk-update-icon-cache -f -t ~/.local/share/icons/flattrcolor
-# Automaticaly refresh dwmbar using a simulated keypress
+# Automaticaly refresh dwmbar using a simulated keypress 
 pidof dwm >/dev/null && xdotool key super+shift+F5
 # Set wallpaper for awesome wm
-#echo 'awesome.restart()' | awesome-client
+#echo 'awesome.restart()' | awesome-client 
 xwallpaper --zoom "$bgloc"
-# Restart qtile
+# Restart qtile 
 qtile-cmd -o cmd -f restart >/dev/null 2>&1

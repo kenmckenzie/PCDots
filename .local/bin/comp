@@ -1,0 +1,12 @@
+#!/bin/sh
+# Small script to that checks compositor status and starts/stops it as needed
+# Set to a keybind on tilers
+# Written with a variable to be used with other programs if required
+SERVICE="picom"
+if pgrep -x "$SERVICE" >/dev/null
+then
+	pkill $SERVICE 
+else
+	# remove the -b if to be used with another service 
+	$SERVICE -b 
+fi
