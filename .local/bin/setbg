@@ -17,6 +17,9 @@ bgloc="${XDG_CACHE_HOME:-$HOME/.cache/}/bg"
 # Random Wallpaper showing
 [ -d "$1" ] && ln -sf "$(find "$(readlink -f "$1")" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)" "$bgloc" && notify-send -i "$bgloc" "Random Wallpaper chosen."
 
+# Check if WPGTK icons and gtk theme is installed, if not, install
+[ ! -f "$HOME/.local/share/themes/FlatColor/index.theme" ] && wpg-install.sh && echo "Testing"
+
 # If pywal is installed, use it.
 wal -s -i "$(readlink -f "$bgloc")" -o "${XDG_CONFIG_HOME:-$HOME/.config}/wal/postrun" >/dev/null 2>&1
 # Creates a gtk theme using wpgtk and copies it to /usr/share for lightdm
